@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VertikalBeweglichesFach" customModule="DigitalisiererAnimation">
+            <connections>
+                <outlet property="beweglicherDoppelEinzug" destination="j05-IJ-dTh" id="cQf-Hv-R3E"/>
+                <outlet property="einzugOberesFachTopConstraint" destination="FhM-Z3-ebG" id="6C0-th-MnG"/>
+                <outlet property="einzugUnteresFachTopConstraint" destination="tew-fO-j1l" id="gr1-F5-Hcj"/>
+                <outlet property="obererEinzug" destination="8h8-Af-3OQ" id="Y5l-Gr-EJd"/>
+                <outlet property="oberesFach" destination="wlq-PI-LoH" id="HlD-cw-2QV"/>
+                <outlet property="untererEinzug" destination="TK7-2T-h70" id="5Xf-Ko-Tgc"/>
+                <outlet property="unteresFach" destination="pPT-14-O2X" id="XlP-ja-Wrs"/>
+                <outletCollection property="einzuegeWidth" destination="8fy-Ll-342" collectionClass="NSMutableArray" id="w9g-jQ-sat"/>
+                <outletCollection property="einzuegeWidth" destination="TG8-61-aXo" collectionClass="NSMutableArray" id="TJ3-vQ-wnv"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="933" height="891"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoq-ku-1jt">
+                    <rect key="frame" x="0.0" y="20" width="933" height="871"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJZ-d1-p6S">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="871"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-Af-3OQ" customClass="Einzug" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="23" width="50" height="100"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="8fy-Ll-342"/>
+                                        <constraint firstAttribute="height" constant="100" id="pjJ-0J-5ap"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="ju0-bE-jII" appends="YES" id="KSN-4p-UpR"/>
+                                    </connections>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK7-2T-h70" customClass="Einzug" customModule="DigitalisiererAnimation">
+                                    <rect key="frame" x="0.0" y="475.5" width="50" height="100"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="TG8-61-aXo"/>
+                                        <constraint firstAttribute="height" constant="100" id="gM2-in-5Bl"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="Npc-77-q96" appends="YES" id="YjP-NH-hlO"/>
+                                    </connections>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="8h8-Af-3OQ" secondAttribute="trailing" id="11k-kN-mQk"/>
+                                <constraint firstItem="8h8-Af-3OQ" firstAttribute="top" secondItem="fJZ-d1-p6S" secondAttribute="top" constant="23" id="FhM-Z3-ebG"/>
+                                <constraint firstAttribute="width" secondItem="TK7-2T-h70" secondAttribute="width" id="et3-Rt-IYa"/>
+                                <constraint firstAttribute="trailing" secondItem="TK7-2T-h70" secondAttribute="trailing" id="sL2-eO-ufR"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4Cq-PP-ebT">
+                            <rect key="frame" x="50" y="0.0" width="736" height="871"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlq-PI-LoH" customClass="FachMitKlappe" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="736" height="435.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <gestureRecognizers/>
+                                </view>
+                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPT-14-O2X" customClass="FachMitKlappe" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="435.5" width="736" height="435.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <gestureRecognizers/>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j05-IJ-dTh" customClass="BeweglicherDoppelEinzugScanModul" customModule="DigitalisiererAnimation">
+                            <rect key="frame" x="786" y="0.0" width="147" height="871"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <gestureRecognizers/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="4Cq-PP-ebT" firstAttribute="width" secondItem="j05-IJ-dTh" secondAttribute="width" multiplier="5" id="avg-20-8Cl"/>
+                        <constraint firstItem="TK7-2T-h70" firstAttribute="top" secondItem="pPT-14-O2X" secondAttribute="top" constant="40" id="tew-fO-j1l"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="yoq-ku-1jt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GFx-NN-WBQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yoq-ku-1jt" secondAttribute="trailing" id="dMk-N3-PiS"/>
+                <constraint firstItem="yoq-ku-1jt" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="hdD-LG-6PR"/>
+                <constraint firstAttribute="bottom" secondItem="yoq-ku-1jt" secondAttribute="bottom" id="rrT-g8-UB9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="313.5" y="384.5"/>
+        </view>
+        <tapGestureRecognizer id="ju0-bE-jII" userLabel="TapOberereEinzug">
+            <connections>
+                <action selector="tapObererEinzug:" destination="-1" id="JjN-hW-PuQ"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Npc-77-q96" userLabel="TapUntererEinzug">
+            <connections>
+                <action selector="tapUntererEinzug:" destination="-1" id="Zmv-q0-noe"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

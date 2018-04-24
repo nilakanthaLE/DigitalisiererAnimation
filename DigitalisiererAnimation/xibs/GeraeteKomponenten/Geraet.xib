@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Geraet" customModule="DigitalisiererAnimation">
+            <connections>
+                <outlet property="ablageFaecher" destination="zuw-ZH-bpG" id="R4S-Z5-JW9"/>
+                <outlet property="beweglichesFach" destination="8m8-HR-kRc" id="9rM-9S-F9C"/>
+                <outlet property="beweglichesFachTop" destination="5zW-vt-FKO" id="x9Q-SB-fd3"/>
+                <outlet property="eingabeFach" destination="Yud-5v-hjz" id="Pzr-i9-GOS"/>
+                <outlet property="gehaeuse" destination="woA-gU-JE9" id="IUR-0L-tmt"/>
+                <outlet property="gesuchtesDokumentView" destination="oDm-7a-PtT" id="hhb-j6-cNl"/>
+                <outlet property="scanDokumentView" destination="7vH-1e-wWE" id="fYl-KE-8du"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woA-gU-JE9" userLabel="Gehause">
+                    <rect key="frame" x="214" y="0.0" width="809.5" height="768"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yud-5v-hjz" userLabel="EingabeFach" customClass="FachMitKlappe" customModule="DigitalisiererAnimation">
+                    <rect key="frame" x="0.0" y="120" width="314.5" height="77"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuw-ZH-bpG" userLabel="AblageFaecher" customClass="EinlagerungsFaecher" customModule="DigitalisiererAnimation">
+                    <rect key="frame" x="709.5" y="0.0" width="314.5" height="768"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="HXV-cA-tc5" appends="YES" id="5JX-fl-XWK"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8m8-HR-kRc" customClass="VertikalBeweglichesFach" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                    <rect key="frame" x="314.5" y="21" width="395" height="153.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-KV-W2y">
+                    <rect key="frame" x="30" y="217" width="154.5" height="438"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oDm-7a-PtT" userLabel="gesuchtes Dokument" customClass="DokumentView" customModule="DigitalisiererAnimation">
+                            <rect key="frame" x="0.0" y="0.0" width="154.5" height="216.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="oDm-7a-PtT" secondAttribute="height" multiplier="10:14" id="kEu-Lp-AIr"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vH-1e-wWE" userLabel="scan Dokument" customClass="DokumentView" customModule="DigitalisiererAnimation">
+                            <rect key="frame" x="0.0" y="221.5" width="154.5" height="216.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Yud-5v-hjz" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="100" id="2V2-8S-LrV"/>
+                <constraint firstItem="zuw-ZH-bpG" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="5KD-o7-JTa"/>
+                <constraint firstItem="8m8-HR-kRc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="1" id="5zW-vt-FKO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zuw-ZH-bpG" secondAttribute="trailing" id="Ego-96-hiW"/>
+                <constraint firstItem="woA-gU-JE9" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="HrR-cT-IMo"/>
+                <constraint firstItem="woA-gU-JE9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OVl-kW-n7v"/>
+                <constraint firstItem="zuw-ZH-bpG" firstAttribute="leading" secondItem="8m8-HR-kRc" secondAttribute="trailing" id="Ycp-QU-zUc"/>
+                <constraint firstItem="woA-gU-JE9" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="bcc-m3-27d"/>
+                <constraint firstItem="zuw-ZH-bpG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e0y-VC-eT9"/>
+                <constraint firstItem="woA-gU-JE9" firstAttribute="leading" secondItem="8I5-KV-W2y" secondAttribute="trailing" constant="30" id="hAv-9L-wZG"/>
+                <constraint firstItem="woA-gU-JE9" firstAttribute="leading" secondItem="8m8-HR-kRc" secondAttribute="leading" constant="-100" id="hdR-Ha-dV0"/>
+                <constraint firstItem="8I5-KV-W2y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="kA5-TL-Ejd"/>
+                <constraint firstItem="8I5-KV-W2y" firstAttribute="top" secondItem="Yud-5v-hjz" secondAttribute="bottom" constant="20" id="lZH-Xu-gAx"/>
+                <constraint firstItem="zuw-ZH-bpG" firstAttribute="width" secondItem="8m8-HR-kRc" secondAttribute="width" constant="-80" id="myQ-xZ-FB3"/>
+                <constraint firstItem="Yud-5v-hjz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="sXC-yo-zWJ"/>
+                <constraint firstItem="8m8-HR-kRc" firstAttribute="height" secondItem="zuw-ZH-bpG" secondAttribute="height" multiplier="1:5" id="sax-Fm-hAx"/>
+                <constraint firstItem="Yud-5v-hjz" firstAttribute="height" secondItem="8m8-HR-kRc" secondAttribute="height" multiplier="1:2" id="sed-50-ZqS"/>
+                <constraint firstItem="8m8-HR-kRc" firstAttribute="leading" secondItem="Yud-5v-hjz" secondAttribute="trailing" id="tch-Yw-vKN"/>
+                <constraint firstItem="zuw-ZH-bpG" firstAttribute="width" secondItem="Yud-5v-hjz" secondAttribute="width" id="ugW-gc-7sY"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="34" y="54"/>
+        </view>
+        <tapGestureRecognizer numberOfTapsRequired="2" id="HXV-cA-tc5" userLabel="ablageFaecherDoppelTapped">
+            <connections>
+                <action selector="ablageFaecherDoppelTapped:" destination="-1" id="Bzt-FV-77q"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

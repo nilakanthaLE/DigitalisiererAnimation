@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Blatt" customModule="DigitalisiererAnimation" customModuleProvider="target">
+            <connections>
+                <outlet property="blattHaelfteLinks" destination="s1F-i0-5Ri" id="kUq-yr-N6F"/>
+                <outlet property="blattHaelfteRechts" destination="hBm-fC-NR0" id="qNM-kH-Afe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1029" height="88"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBm-fC-NR0" customClass="BlattHaelfte" customModule="DigitalisiererAnimation">
+                    <rect key="frame" x="-0.5" y="0.0" width="1029" height="88"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1F-i0-5Ri" customClass="BlattHaelfte" customModule="DigitalisiererAnimation">
+                    <rect key="frame" x="-0.5" y="0.0" width="1029" height="88"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="s1F-i0-5Ri" secondAttribute="trailing" id="9fy-Qt-NeV"/>
+                <constraint firstItem="s1F-i0-5Ri" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AWh-Fs-eaT"/>
+                <constraint firstAttribute="trailing" secondItem="hBm-fC-NR0" secondAttribute="trailing" id="HgU-vA-j2o"/>
+                <constraint firstItem="hBm-fC-NR0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="VOA-tR-gmB"/>
+                <constraint firstItem="hBm-fC-NR0" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="VZk-6U-hyB" userLabel="Blatt Haelfte Rechts.bottom = Safe Area.bottom "/>
+                <constraint firstItem="s1F-i0-5Ri" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="gFP-Mg-9X1"/>
+                <constraint firstItem="s1F-i0-5Ri" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="jPd-ou-dh9" userLabel="Blatt Haelfte Links.bottom = Safe Area.bottom"/>
+                <constraint firstItem="hBm-fC-NR0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kCl-rv-YYM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="165.5" y="-235"/>
+        </view>
+    </objects>
+</document>

@@ -7,23 +7,117 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C19AACC20594D3C0038BFA9 /* EinlagerungsFaecher.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C19AACB20594D3C0038BFA9 /* EinlagerungsFaecher.xib */; };
+		5C19AACE20594EAE0038BFA9 /* EinlagerungsFaecher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19AACD20594EAE0038BFA9 /* EinlagerungsFaecher.swift */; };
+		5C19AAD0205959EA0038BFA9 /* Geraet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C19AACF205959EA0038BFA9 /* Geraet.xib */; };
+		5C19AAD220595BD20038BFA9 /* Geraet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19AAD120595BD20038BFA9 /* Geraet.swift */; };
+		5C19AAD6205ABB2D0038BFA9 /* PosFeinTuning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19AAD5205ABB2D0038BFA9 /* PosFeinTuning.swift */; };
+		5C3C40D32073B1E800C8898E /* DokumentCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */; };
+		5C3C40D5207B64D300C8898E /* BlattStueck.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3C40D4207B64D300C8898E /* BlattStueck.xib */; };
+		5C515D612069178700E2F1BD /* DokumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C515D602069178700E2F1BD /* DokumentView.xib */; };
+		5C515D652069191600E2F1BD /* DokumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C515D642069191600E2F1BD /* DokumentView.swift */; };
+		5C65E07C205EC8BC00D34170 /* PapierStapel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65E07B205EC8BC00D34170 /* PapierStapel.swift */; };
+		5C65E081205EFFC600D34170 /* PapierStapel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E080205EFFC600D34170 /* PapierStapel.xib */; };
+		5C65E083205F986F00D34170 /* Blatt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E082205F986F00D34170 /* Blatt.xib */; };
+		5C65E085205F9BB200D34170 /* BlattHaelfte.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E084205F9BB200D34170 /* BlattHaelfte.xib */; };
+		5C65E087205FD40600D34170 /* Klappe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E086205FD40600D34170 /* Klappe.xib */; };
+		5C701D012089C591000DA49D /* EnumsUndStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D002089C591000DA49D /* EnumsUndStructs.swift */; };
+		5C701D032089E364000DA49D /* FeinTuningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D022089E364000DA49D /* FeinTuningViewModel.swift */; };
+		5C701D052089ED10000DA49D /* FineTuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D042089ED10000DA49D /* FineTuner.swift */; };
+		5C701D09208DCBD6000DA49D /* DokumentenAuswahlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */; };
+		5C701D0B208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */; };
+		5CBBF95F206D0A620032CAC7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBBF95E206D0A620032CAC7 /* Tag.swift */; };
+		5CBBF963206D293B0032CAC7 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */; };
 		5CC724D42056A05B001F1C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724D32056A05B001F1C46 /* AppDelegate.swift */; };
-		5CC724D62056A05B001F1C46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724D52056A05B001F1C46 /* ViewController.swift */; };
+		5CC724D62056A05B001F1C46 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724D52056A05B001F1C46 /* extension.swift */; };
 		5CC724D92056A05B001F1C46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724D72056A05B001F1C46 /* Main.storyboard */; };
 		5CC724DC2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724DA2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodeld */; };
 		5CC724DE2056A05B001F1C46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724DD2056A05B001F1C46 /* Assets.xcassets */; };
 		5CC724E12056A05B001F1C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724DF2056A05B001F1C46 /* LaunchScreen.storyboard */; };
+		5CC724E92056B58B001F1C46 /* Einzug.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724E82056B58B001F1C46 /* Einzug.xib */; };
+		5CC724EB2056B6FC001F1C46 /* NibLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724EA2056B6FC001F1C46 /* NibLoadingView.swift */; };
+		5CC724F92056C6D1001F1C46 /* DoppelEinzugScanModul.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724F82056C6D1001F1C46 /* DoppelEinzugScanModul.xib */; };
+		5CC724FD2056E092001F1C46 /* FachMitKlappe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724FC2056E092001F1C46 /* FachMitKlappe.swift */; };
+		5CC724FF2056F6D3001F1C46 /* FachMitKlappe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CC724FE2056F6D3001F1C46 /* FachMitKlappe.xib */; };
+		5CC7250120570FBC001F1C46 /* GeraetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7250020570FBC001F1C46 /* GeraetViewController.swift */; };
+		5CC725032057166E001F1C46 /* BeweglicherDoppelEinzugScanModul.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CC725022057166E001F1C46 /* BeweglicherDoppelEinzugScanModul.xib */; };
+		5CC7250520571A2E001F1C46 /* WalzeEinzugScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7250420571A2E001F1C46 /* WalzeEinzugScannerView.swift */; };
+		5CC7250720580B5E001F1C46 /* VertikalBeweglichesFach.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CC7250620580B5E001F1C46 /* VertikalBeweglichesFach.xib */; };
+		5CC7250920580CA8001F1C46 /* VertikalBeweglichesFach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC7250820580CA8001F1C46 /* VertikalBeweglichesFach.swift */; };
+		5CDB75B3207FD22600611C30 /* PositionenUndFramesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75B2207FD22600611C30 /* PositionenUndFramesModel.swift */; };
+		5CDB75B5207FD23500611C30 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75B4207FD23500611C30 /* MainModel.swift */; };
+		5CDB75B7207FD2DC00611C30 /* AnimationenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75B6207FD2DC00611C30 /* AnimationenModel.swift */; };
+		5CDB75B9207FD32100611C30 /* KomponentenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75B8207FD32100611C30 /* KomponentenModel.swift */; };
+		5CDB75BC208093A100611C30 /* GeraetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75BB208093A100611C30 /* GeraetViewModel.swift */; };
+		5CDB75BF2083A56D00611C30 /* WalzeEinzugScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75BE2083A56D00611C30 /* WalzeEinzugScannerViewModel.swift */; };
+		5CDB75C12083A5A000611C30 /* PapierStapelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75C02083A5A000611C30 /* PapierStapelViewModel.swift */; };
+		5CDB75C32083A5F300611C30 /* FachUndKlappeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75C22083A5F300611C30 /* FachUndKlappeViewModel.swift */; };
+		5CDB75C52083A63A00611C30 /* VertBeweglFachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75C42083A63A00611C30 /* VertBeweglFachViewModel.swift */; };
+		5CDB75C72083A67900611C30 /* EinlagerungsFaecherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75C62083A67900611C30 /* EinlagerungsFaecherViewModel.swift */; };
+		5CDB75C92083CEAB00611C30 /* GeraetUndInAktionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75C82083CEAB00611C30 /* GeraetUndInAktionModel.swift */; };
+		5CDB75D32087319C00611C30 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75D22087319C00611C30 /* CollectionViewCells.swift */; };
+		5CDB75D52087320500611C30 /* CollectionCellsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB75D42087320500611C30 /* CollectionCellsViewModel.swift */; };
+		5CE99F3B20692CA500158038 /* Dokument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE99F3A20692CA500158038 /* Dokument.swift */; };
+		914C17B3994CB8EBB3F60A4E /* Pods_DigitalisiererAnimation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52F8C7A63C2914CF544E4E3 /* Pods_DigitalisiererAnimation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C19AACB20594D3C0038BFA9 /* EinlagerungsFaecher.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EinlagerungsFaecher.xib; sourceTree = "<group>"; };
+		5C19AACD20594EAE0038BFA9 /* EinlagerungsFaecher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinlagerungsFaecher.swift; sourceTree = "<group>"; };
+		5C19AACF205959EA0038BFA9 /* Geraet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Geraet.xib; sourceTree = "<group>"; };
+		5C19AAD120595BD20038BFA9 /* Geraet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geraet.swift; sourceTree = "<group>"; };
+		5C19AAD5205ABB2D0038BFA9 /* PosFeinTuning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosFeinTuning.swift; sourceTree = "<group>"; };
+		5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DokumentCollectionCell.xib; sourceTree = "<group>"; };
+		5C3C40D4207B64D300C8898E /* BlattStueck.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlattStueck.xib; sourceTree = "<group>"; };
+		5C515D602069178700E2F1BD /* DokumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DokumentView.xib; sourceTree = "<group>"; };
+		5C515D642069191600E2F1BD /* DokumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentView.swift; sourceTree = "<group>"; };
+		5C65E07B205EC8BC00D34170 /* PapierStapel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapierStapel.swift; sourceTree = "<group>"; };
+		5C65E080205EFFC600D34170 /* PapierStapel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PapierStapel.xib; sourceTree = "<group>"; };
+		5C65E082205F986F00D34170 /* Blatt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Blatt.xib; sourceTree = "<group>"; };
+		5C65E084205F9BB200D34170 /* BlattHaelfte.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlattHaelfte.xib; sourceTree = "<group>"; };
+		5C65E086205FD40600D34170 /* Klappe.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Klappe.xib; sourceTree = "<group>"; };
+		5C701D002089C591000DA49D /* EnumsUndStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumsUndStructs.swift; sourceTree = "<group>"; };
+		5C701D022089E364000DA49D /* FeinTuningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeinTuningViewModel.swift; sourceTree = "<group>"; };
+		5C701D042089ED10000DA49D /* FineTuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineTuner.swift; sourceTree = "<group>"; };
+		5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentenAuswahlVC.swift; sourceTree = "<group>"; };
+		5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentenAuswahlViewModel.swift; sourceTree = "<group>"; };
+		5CBBF95E206D0A620032CAC7 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 		5CC724D02056A05B001F1C46 /* DigitalisiererAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigitalisiererAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC724D32056A05B001F1C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5CC724D52056A05B001F1C46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5CC724D52056A05B001F1C46 /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		5CC724D82056A05B001F1C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CC724DB2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DigitalisiererAnimation.xcdatamodel; sourceTree = "<group>"; };
 		5CC724DD2056A05B001F1C46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CC724E02056A05B001F1C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CC724E22056A05B001F1C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CC724E82056B58B001F1C46 /* Einzug.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Einzug.xib; sourceTree = "<group>"; };
+		5CC724EA2056B6FC001F1C46 /* NibLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadingView.swift; sourceTree = "<group>"; };
+		5CC724F82056C6D1001F1C46 /* DoppelEinzugScanModul.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoppelEinzugScanModul.xib; sourceTree = "<group>"; };
+		5CC724FC2056E092001F1C46 /* FachMitKlappe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FachMitKlappe.swift; sourceTree = "<group>"; };
+		5CC724FE2056F6D3001F1C46 /* FachMitKlappe.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FachMitKlappe.xib; sourceTree = "<group>"; };
+		5CC7250020570FBC001F1C46 /* GeraetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraetViewController.swift; sourceTree = "<group>"; };
+		5CC725022057166E001F1C46 /* BeweglicherDoppelEinzugScanModul.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeweglicherDoppelEinzugScanModul.xib; sourceTree = "<group>"; };
+		5CC7250420571A2E001F1C46 /* WalzeEinzugScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalzeEinzugScannerView.swift; sourceTree = "<group>"; };
+		5CC7250620580B5E001F1C46 /* VertikalBeweglichesFach.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VertikalBeweglichesFach.xib; sourceTree = "<group>"; };
+		5CC7250820580CA8001F1C46 /* VertikalBeweglichesFach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertikalBeweglichesFach.swift; sourceTree = "<group>"; };
+		5CDB75B2207FD22600611C30 /* PositionenUndFramesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionenUndFramesModel.swift; sourceTree = "<group>"; };
+		5CDB75B4207FD23500611C30 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		5CDB75B6207FD2DC00611C30 /* AnimationenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationenModel.swift; sourceTree = "<group>"; };
+		5CDB75B8207FD32100611C30 /* KomponentenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KomponentenModel.swift; sourceTree = "<group>"; };
+		5CDB75BB208093A100611C30 /* GeraetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraetViewModel.swift; sourceTree = "<group>"; };
+		5CDB75BE2083A56D00611C30 /* WalzeEinzugScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalzeEinzugScannerViewModel.swift; sourceTree = "<group>"; };
+		5CDB75C02083A5A000611C30 /* PapierStapelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapierStapelViewModel.swift; sourceTree = "<group>"; };
+		5CDB75C22083A5F300611C30 /* FachUndKlappeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FachUndKlappeViewModel.swift; sourceTree = "<group>"; };
+		5CDB75C42083A63A00611C30 /* VertBeweglFachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertBeweglFachViewModel.swift; sourceTree = "<group>"; };
+		5CDB75C62083A67900611C30 /* EinlagerungsFaecherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinlagerungsFaecherViewModel.swift; sourceTree = "<group>"; };
+		5CDB75C82083CEAB00611C30 /* GeraetUndInAktionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeraetUndInAktionModel.swift; sourceTree = "<group>"; };
+		5CDB75D22087319C00611C30 /* CollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
+		5CDB75D42087320500611C30 /* CollectionCellsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellsViewModel.swift; sourceTree = "<group>"; };
+		5CE99F3A20692CA500158038 /* Dokument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dokument.swift; sourceTree = "<group>"; };
+		9639AFF2EB48ED75757FFADE /* Pods-DigitalisiererAnimation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigitalisiererAnimation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DigitalisiererAnimation/Pods-DigitalisiererAnimation.debug.xcconfig"; sourceTree = "<group>"; };
+		B52F8C7A63C2914CF544E4E3 /* Pods_DigitalisiererAnimation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigitalisiererAnimation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B59DCAEB18F7A91499F7D6D3 /* Pods-DigitalisiererAnimation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigitalisiererAnimation.release.xcconfig"; path = "Pods/Target Support Files/Pods-DigitalisiererAnimation/Pods-DigitalisiererAnimation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +125,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				914C17B3994CB8EBB3F60A4E /* Pods_DigitalisiererAnimation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C701D06208DCABD000DA49D /* GeraeteKomponenten */ = {
+			isa = PBXGroup;
+			children = (
+				5C19AAD120595BD20038BFA9 /* Geraet.swift */,
+				5C19AACD20594EAE0038BFA9 /* EinlagerungsFaecher.swift */,
+				5CC7250820580CA8001F1C46 /* VertikalBeweglichesFach.swift */,
+				5CC724FC2056E092001F1C46 /* FachMitKlappe.swift */,
+				5CC7250420571A2E001F1C46 /* WalzeEinzugScannerView.swift */,
+				5C65E07B205EC8BC00D34170 /* PapierStapel.swift */,
+			);
+			path = GeraeteKomponenten;
+			sourceTree = "<group>";
+		};
+		5C701D07208DCAD7000DA49D /* GeraeteKomponenten */ = {
+			isa = PBXGroup;
+			children = (
+				5CDB75BB208093A100611C30 /* GeraetViewModel.swift */,
+				5CDB75C62083A67900611C30 /* EinlagerungsFaecherViewModel.swift */,
+				5CDB75C42083A63A00611C30 /* VertBeweglFachViewModel.swift */,
+				5CDB75C22083A5F300611C30 /* FachUndKlappeViewModel.swift */,
+				5CDB75C02083A5A000611C30 /* PapierStapelViewModel.swift */,
+				5CDB75BE2083A56D00611C30 /* WalzeEinzugScannerViewModel.swift */,
+			);
+			path = GeraeteKomponenten;
+			sourceTree = "<group>";
+		};
 		5CC724C72056A05B001F1C46 = {
 			isa = PBXGroup;
 			children = (
 				5CC724D22056A05B001F1C46 /* DigitalisiererAnimation */,
 				5CC724D12056A05B001F1C46 /* Products */,
+				70C285845378EE3A20B6C19F /* Pods */,
+				AA068134A2A737733D002804 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +179,139 @@
 		5CC724D22056A05B001F1C46 /* DigitalisiererAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				5CC724D32056A05B001F1C46 /* AppDelegate.swift */,
-				5CC724D52056A05B001F1C46 /* ViewController.swift */,
 				5CC724D72056A05B001F1C46 /* Main.storyboard */,
-				5CC724DD2056A05B001F1C46 /* Assets.xcassets */,
-				5CC724DF2056A05B001F1C46 /* LaunchScreen.storyboard */,
+				5CC7250020570FBC001F1C46 /* GeraetViewController.swift */,
+				5CDB75B1207FD1F700611C30 /* Models */,
+				5CDB75BD2083A54A00611C30 /* ViewModels */,
+				5CDB75CE2084CAF800611C30 /* ViewClasses */,
+				5CDB75CA2084C9CD00611C30 /* xibs */,
+				5CDB75D02084CB8500611C30 /* Stuff */,
 				5CC724E22056A05B001F1C46 /* Info.plist */,
-				5CC724DA2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodeld */,
 			);
 			path = DigitalisiererAnimation;
+			sourceTree = "<group>";
+		};
+		5CDB75B1207FD1F700611C30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5CDB75B4207FD23500611C30 /* MainModel.swift */,
+				5CDB75B2207FD22600611C30 /* PositionenUndFramesModel.swift */,
+				5CDB75B6207FD2DC00611C30 /* AnimationenModel.swift */,
+				5CDB75B8207FD32100611C30 /* KomponentenModel.swift */,
+				5CDB75C82083CEAB00611C30 /* GeraetUndInAktionModel.swift */,
+				5C701D002089C591000DA49D /* EnumsUndStructs.swift */,
+				5CDB75CF2084CB5100611C30 /* CoreData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5CDB75BD2083A54A00611C30 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5C701D07208DCAD7000DA49D /* GeraeteKomponenten */,
+				5CDB75D42087320500611C30 /* CollectionCellsViewModel.swift */,
+				5C701D022089E364000DA49D /* FeinTuningViewModel.swift */,
+				5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5CDB75CA2084C9CD00611C30 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				5CDB75CB2084CA2000611C30 /* GeraeteKomponenten */,
+				5CDB75CC2084CA5A00611C30 /* PapierStapelKomponenten */,
+				5CDB75CD2084CAB300611C30 /* andere */,
+			);
+			path = xibs;
+			sourceTree = "<group>";
+		};
+		5CDB75CB2084CA2000611C30 /* GeraeteKomponenten */ = {
+			isa = PBXGroup;
+			children = (
+				5C19AACF205959EA0038BFA9 /* Geraet.xib */,
+				5C19AACB20594D3C0038BFA9 /* EinlagerungsFaecher.xib */,
+				5CC7250620580B5E001F1C46 /* VertikalBeweglichesFach.xib */,
+				5CC725022057166E001F1C46 /* BeweglicherDoppelEinzugScanModul.xib */,
+				5CC724FE2056F6D3001F1C46 /* FachMitKlappe.xib */,
+				5CC724F82056C6D1001F1C46 /* DoppelEinzugScanModul.xib */,
+				5CC724E82056B58B001F1C46 /* Einzug.xib */,
+				5C65E086205FD40600D34170 /* Klappe.xib */,
+			);
+			path = GeraeteKomponenten;
+			sourceTree = "<group>";
+		};
+		5CDB75CC2084CA5A00611C30 /* PapierStapelKomponenten */ = {
+			isa = PBXGroup;
+			children = (
+				5C65E080205EFFC600D34170 /* PapierStapel.xib */,
+				5C3C40D4207B64D300C8898E /* BlattStueck.xib */,
+				5C65E082205F986F00D34170 /* Blatt.xib */,
+				5C65E084205F9BB200D34170 /* BlattHaelfte.xib */,
+			);
+			path = PapierStapelKomponenten;
+			sourceTree = "<group>";
+		};
+		5CDB75CD2084CAB300611C30 /* andere */ = {
+			isa = PBXGroup;
+			children = (
+				5C515D602069178700E2F1BD /* DokumentView.xib */,
+				5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */,
+				5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */,
+			);
+			path = andere;
+			sourceTree = "<group>";
+		};
+		5CDB75CE2084CAF800611C30 /* ViewClasses */ = {
+			isa = PBXGroup;
+			children = (
+				5C701D06208DCABD000DA49D /* GeraeteKomponenten */,
+				5C515D642069191600E2F1BD /* DokumentView.swift */,
+				5CDB75D22087319C00611C30 /* CollectionViewCells.swift */,
+				5C701D042089ED10000DA49D /* FineTuner.swift */,
+				5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */,
+			);
+			path = ViewClasses;
+			sourceTree = "<group>";
+		};
+		5CDB75CF2084CB5100611C30 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5CC724DA2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodeld */,
+				5CE99F3A20692CA500158038 /* Dokument.swift */,
+				5CBBF95E206D0A620032CAC7 /* Tag.swift */,
+				5C19AAD5205ABB2D0038BFA9 /* PosFeinTuning.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5CDB75D02084CB8500611C30 /* Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				5CC724EA2056B6FC001F1C46 /* NibLoadingView.swift */,
+				5CC724D52056A05B001F1C46 /* extension.swift */,
+				5CC724D32056A05B001F1C46 /* AppDelegate.swift */,
+				5CC724DD2056A05B001F1C46 /* Assets.xcassets */,
+				5CC724DF2056A05B001F1C46 /* LaunchScreen.storyboard */,
+			);
+			path = Stuff;
+			sourceTree = "<group>";
+		};
+		70C285845378EE3A20B6C19F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9639AFF2EB48ED75757FFADE /* Pods-DigitalisiererAnimation.debug.xcconfig */,
+				B59DCAEB18F7A91499F7D6D3 /* Pods-DigitalisiererAnimation.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA068134A2A737733D002804 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B52F8C7A63C2914CF544E4E3 /* Pods_DigitalisiererAnimation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +321,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CC724E52056A05B001F1C46 /* Build configuration list for PBXNativeTarget "DigitalisiererAnimation" */;
 			buildPhases = (
+				BBBE55DB0175BEC560CD88FF /* [CP] Check Pods Manifest.lock */,
 				5CC724CC2056A05B001F1C46 /* Sources */,
 				5CC724CD2056A05B001F1C46 /* Frameworks */,
 				5CC724CE2056A05B001F1C46 /* Resources */,
+				82457A619E99E8AD491FFBBB /* [CP] Embed Pods Frameworks */,
+				21E86E0BD8ACEE9C117DD11F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -127,21 +377,124 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CC724E12056A05B001F1C46 /* LaunchScreen.storyboard in Resources */,
+				5C65E085205F9BB200D34170 /* BlattHaelfte.xib in Resources */,
+				5C19AAD0205959EA0038BFA9 /* Geraet.xib in Resources */,
+				5C515D612069178700E2F1BD /* DokumentView.xib in Resources */,
+				5CC724F92056C6D1001F1C46 /* DoppelEinzugScanModul.xib in Resources */,
+				5CC724E92056B58B001F1C46 /* Einzug.xib in Resources */,
+				5CC724FF2056F6D3001F1C46 /* FachMitKlappe.xib in Resources */,
+				5C65E087205FD40600D34170 /* Klappe.xib in Resources */,
+				5C19AACC20594D3C0038BFA9 /* EinlagerungsFaecher.xib in Resources */,
+				5CC725032057166E001F1C46 /* BeweglicherDoppelEinzugScanModul.xib in Resources */,
 				5CC724DE2056A05B001F1C46 /* Assets.xcassets in Resources */,
+				5C65E081205EFFC600D34170 /* PapierStapel.xib in Resources */,
 				5CC724D92056A05B001F1C46 /* Main.storyboard in Resources */,
+				5CC7250720580B5E001F1C46 /* VertikalBeweglichesFach.xib in Resources */,
+				5CBBF963206D293B0032CAC7 /* TagCollectionViewCell.xib in Resources */,
+				5C65E083205F986F00D34170 /* Blatt.xib in Resources */,
+				5C3C40D32073B1E800C8898E /* DokumentCollectionCell.xib in Resources */,
+				5C3C40D5207B64D300C8898E /* BlattStueck.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21E86E0BD8ACEE9C117DD11F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DigitalisiererAnimation/Pods-DigitalisiererAnimation-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82457A619E99E8AD491FFBBB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DigitalisiererAnimation/Pods-DigitalisiererAnimation-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DigitalisiererAnimation/Pods-DigitalisiererAnimation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBBE55DB0175BEC560CD88FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DigitalisiererAnimation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CC724CC2056A05B001F1C46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CDB75D32087319C00611C30 /* CollectionViewCells.swift in Sources */,
+				5CE99F3B20692CA500158038 /* Dokument.swift in Sources */,
 				5CC724DC2056A05B001F1C46 /* DigitalisiererAnimation.xcdatamodeld in Sources */,
-				5CC724D62056A05B001F1C46 /* ViewController.swift in Sources */,
+				5CDB75B5207FD23500611C30 /* MainModel.swift in Sources */,
+				5CDB75B9207FD32100611C30 /* KomponentenModel.swift in Sources */,
+				5CDB75C32083A5F300611C30 /* FachUndKlappeViewModel.swift in Sources */,
+				5CDB75C12083A5A000611C30 /* PapierStapelViewModel.swift in Sources */,
+				5CDB75BF2083A56D00611C30 /* WalzeEinzugScannerViewModel.swift in Sources */,
+				5CDB75B7207FD2DC00611C30 /* AnimationenModel.swift in Sources */,
+				5CC7250920580CA8001F1C46 /* VertikalBeweglichesFach.swift in Sources */,
+				5CDB75C52083A63A00611C30 /* VertBeweglFachViewModel.swift in Sources */,
+				5CC724EB2056B6FC001F1C46 /* NibLoadingView.swift in Sources */,
+				5C701D032089E364000DA49D /* FeinTuningViewModel.swift in Sources */,
+				5CDB75BC208093A100611C30 /* GeraetViewModel.swift in Sources */,
+				5CC724D62056A05B001F1C46 /* extension.swift in Sources */,
+				5CC7250520571A2E001F1C46 /* WalzeEinzugScannerView.swift in Sources */,
+				5CC7250120570FBC001F1C46 /* GeraetViewController.swift in Sources */,
+				5C19AACE20594EAE0038BFA9 /* EinlagerungsFaecher.swift in Sources */,
+				5CBBF95F206D0A620032CAC7 /* Tag.swift in Sources */,
+				5CDB75D52087320500611C30 /* CollectionCellsViewModel.swift in Sources */,
+				5CC724FD2056E092001F1C46 /* FachMitKlappe.swift in Sources */,
+				5CDB75C92083CEAB00611C30 /* GeraetUndInAktionModel.swift in Sources */,
+				5C701D0B208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift in Sources */,
+				5C701D052089ED10000DA49D /* FineTuner.swift in Sources */,
+				5CDB75C72083A67900611C30 /* EinlagerungsFaecherViewModel.swift in Sources */,
 				5CC724D42056A05B001F1C46 /* AppDelegate.swift in Sources */,
+				5C19AAD220595BD20038BFA9 /* Geraet.swift in Sources */,
+				5C65E07C205EC8BC00D34170 /* PapierStapel.swift in Sources */,
+				5C19AAD6205ABB2D0038BFA9 /* PosFeinTuning.swift in Sources */,
+				5C701D09208DCBD6000DA49D /* DokumentenAuswahlVC.swift in Sources */,
+				5C515D652069191600E2F1BD /* DokumentView.swift in Sources */,
+				5CDB75B3207FD22600611C30 /* PositionenUndFramesModel.swift in Sources */,
+				5C701D012089C591000DA49D /* EnumsUndStructs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +629,7 @@
 		};
 		5CC724E62056A05B001F1C46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9639AFF2EB48ED75757FFADE /* Pods-DigitalisiererAnimation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -285,12 +639,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DNS.DigitalisiererAnimation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		5CC724E72056A05B001F1C46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B59DCAEB18F7A91499F7D6D3 /* Pods-DigitalisiererAnimation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,7 +655,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = DNS.DigitalisiererAnimation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
