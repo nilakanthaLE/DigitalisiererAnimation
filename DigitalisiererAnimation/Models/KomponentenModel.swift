@@ -10,13 +10,8 @@ import Foundation
 import ReactiveSwift
 
 
-
-
-
-
-
 class EinlagerungsFaecherModel{
-    let openedFach          = MutableProperty<OpenedEinlagerungsFach?>(nil)
+    let openedFach          = MutableProperty<AngefahrenesFach?>(nil)
     let updateFachHoehen    = MutableProperty<Int>(-1)
     
     let faecher:[FachModel]
@@ -25,14 +20,14 @@ class EinlagerungsFaecherModel{
         openedFach.producer.startWithValues { [weak self] openedFach in self?.setOpenedFach(fuer: openedFach) }
     }
     
-    private func setOpenedFach(fuer openedFach:OpenedEinlagerungsFach?){
+    private func setOpenedFach(fuer openedFach:AngefahrenesFach?){
         // schließt und öffnet
         // setzt EinzugsDirection
         for fach in faecher.enumerated(){
-            fach.element.fachIsGeschlossen.value        = openedFach == nil || fach.offset != openedFach!.fachID
-            fach.element.einzugDirection.value          = openedFach == nil || fach.offset == openedFach?.fachID ? .stop : openedFach!.einzugDirection
+            fach.element.fachIsGeschlossen.value        = openedFach == nil || fach.offset != openedFach!.typ.fachID
+            fach.element.einzugDirection.value          = (openedFach == nil || fach.offset != openedFach?.typ.fachID) ? .stop : openedFach!.einzugDirection
         }
-        updateFachHoehen.value = openedFach == nil ? -1 : openedFach!.fachID
+        updateFachHoehen.value = openedFach == nil ? -1 : openedFach!.typ.fachID
     }
 }
 
@@ -60,13 +55,17 @@ class ScanModulModel{
     let position                        = MutableProperty<Position>(.oben)
     let isScanning                      = MutableProperty<Bool>(false)
     let klappWalzeIsOpen                = MutableProperty<Bool>(false)
+    init(position:MutableProperty<Position>){ self.position <~ position.signal }
 }
 
 class VertikalBeweglichesFachModel{
-    let oberesFach          = FachModel(fachTyp: .beweglichesFachOben, anzahlBlaetter: 0)
-    let unteresFach         = FachModel(fachTyp: .beweglichesFachUnten, anzahlBlaetter: 0 )
-    let scanModulModel      = ScanModulModel()
-    let position            = MutableProperty<Position>(.oben)
+    let oberesFach              = FachModel(fachTyp: .beweglichesFachOben, anzahlBlaetter: 0)
+    let unteresFach             = FachModel(fachTyp: .beweglichesFachUnten, anzahlBlaetter: 0 )
+    let obererEinzugDirection   = MutableProperty<Direction>(.stop)
+    let untererEinzugDirection  = MutableProperty<Direction>(.stop)
+    let positionScanModul   = MutableProperty<Position>(.oben)
+    let scanModulModel:ScanModulModel
+    init(){ scanModulModel = ScanModulModel(position: positionScanModul) }
 }
 
 class PapierStapelModel{

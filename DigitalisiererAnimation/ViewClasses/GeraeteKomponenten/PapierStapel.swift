@@ -43,7 +43,7 @@ class PapierStapelAnimiert:PapierStapel{
         { _ in
             self.fallBlatt.isHidden = true
             self.addBlatt()
-            completion?()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {  completion?() }
         }
     }
     
@@ -135,13 +135,14 @@ class PapierStapel:NibLoadingView{
     fileprivate var fallBlatt:UIView!
     fileprivate var fallBlattFrameTop:CGRect    { return CGRect(x: 0, y: 0, width: view.frame.width, height: viewModel.blattDicke) }
     fileprivate var fallBlattFrameBottom:CGRect {
-        guard let lastBlatt = lastBlatt else {return CGRect.zero}
-        return CGRect(x: 0, y: lastBlatt.frame.origin.y - viewModel.blattAbstand.value, width: view.frame.width, height: viewModel.blattDicke)
+        let y = lastBlatt == nil ? view.frame.height - viewModel.blattAbstand.value : lastBlatt!.frame.origin.y - viewModel.blattAbstand.value
+        return CGRect(x: 0, y: y, width: view.frame.width, height: viewModel.blattDicke)
     }
     private func initFallBlatt(){
         fallBlatt                       = UIView()
         fallBlatt.backgroundColor       = .blue
         fallBlatt.frame                 = fallBlattFrameTop
+        fallBlatt.isHidden              = true
         view.addSubview(fallBlatt)
     }
     
@@ -218,52 +219,4 @@ class BlattHaelfte:NibLoadingView{
 
 
 
-//class PapierStapelViewModel{
-//    var fachDesStapels:FachDesStapels
-//    var fachIsGeschlossen               = MutableProperty(true)
-//    var klappRichtung                   = MutableProperty(Direction.stop)
-//
-//    fileprivate var anzahlBlaetter:Int
-//    fileprivate var blattDicke:CGFloat
-//    fileprivate var blattAbstand = MutableProperty<CGFloat>(0)
-//    init(anzahlBlaetter:Int, fachDesStapels:FachDesStapels, blattDicke:CGFloat, blattAbstandOffen:CGFloat, blattAbstandGeschlossen:CGFloat){
-//        self.anzahlBlaetter             = anzahlBlaetter
-//        self.fachDesStapels             = fachDesStapels
-//        self.blattDicke                 = blattDicke
-//        blattAbstand <~ fachIsGeschlossen.producer.map{ $0 ? blattAbstandGeschlossen :blattAbstandOffen }
-//
-//
-//
-//
-//        klappRichtung.producer.startWithValues{[weak self] klappRichtung in
-//            guard let _self = self else {return}
-//
-//            switch klappRichtung == .stop{
-//            case false:
-//                var winkelProp:MutableProperty<CGFloat>{ return klappRichtung == .left ? _self.klappWinkelLinkeBlattHaelfte : _self.klappWinkelRechteBlattHaelfte }
-//                model.setCurrentPapierStapelWinkelProp(winkelProp: winkelProp, fachDesStapels: _self.fachDesStapels, blattWidth: _self.blattWidth)
-//            case true:
-//                _self.klappWinkelLinkeBlattHaelfte.value  = 0
-//                _self.klappWinkelRechteBlattHaelfte.value = 0
-//                model.currentPapierStapelKlappWinkel = nil
-//            }
-//        }
-//
-//        klappWinkelRechteBlattHaelfte.signal.observeValues {winkel in
-//            print("winkel rechts:\(winkel)")}
-//    }
-//    fileprivate var blattWidth:CGFloat              = 10
-//    fileprivate var klappWinkelLinkeBlattHaelfte    = MutableProperty<CGFloat>(0)
-//    fileprivate var klappWinkelRechteBlattHaelfte   = MutableProperty<CGFloat>(0)
-//
-//
-//
-//    private func ueberLapp(blattBreite:CGFloat) -> CGFloat  { return (blattBreite / 2) - (cos(klappWinkelLinkeBlattHaelfte.value) * (blattBreite / 2)) }
-//    func verdeckLinksX(blattBreite:CGFloat) -> CGFloat      {
-//        return -blattBreite + ueberLapp(blattBreite:blattBreite) }
-//    func verdeckRechtsX(blattBreite:CGFloat) -> CGFloat     {
-//        return blattBreite - ueberLapp(blattBreite:blattBreite) }
-//
-//
-//
-//}
+

@@ -16,7 +16,7 @@ class BeweglichesScanModulViewModel{
     init(scanModulModel:ScanModulModel) {
         self.scanModulModel         = scanModulModel
         abstandVonOben              <~ scanModulModel.position.producer.map {mainModel.positionenUndFrames.fineTuningWerte.getAbstandScanModul(fuer: $0)}
-        scanModulModel.position     <~ position.signal
+//        scanModulModel.position     <~ position.signal
         scanModulModel.position     <~ mainModel.positionenUndFrames.fineTuningWerte.fineTuningUpdate.signal.map{[weak self] _ in self?.position.value ?? .oben}
     }
     func setPosition(swipeDirection:UISwipeGestureRecognizerDirection)  { position.value    = swipeDirection == .up ? .oben : .unten }

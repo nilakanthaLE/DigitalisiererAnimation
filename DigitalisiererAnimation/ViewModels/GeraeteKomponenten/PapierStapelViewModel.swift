@@ -40,7 +40,12 @@ class PapierStapelViewModel{
     
     //Klappwinkel berechnen und in Fach setzen
     // der Klappwinkel hängt vom Frame des Stapels ab
-    var frame  = CGRect.zero // wird von view gesetzt (layoutSubviews)
+    var frame  = CGRect.zero {
+        didSet{
+            setKlappWinkel()
+            mainModel.positionenUndFrames.laufZeitWerte.blattWidth = frame.width
+        }
+    } // wird von view gesetzt (layoutSubviews)
     func setKlappWinkel(){
         var winkel:CGFloat{
             guard fachModel.einzugDirection.value == fachModel.klappeDirection else {return 0}
@@ -104,5 +109,12 @@ class BlattHaelfteViewModel{
 class BlattStueckViewModel{
     let blattStueckTyp:BlattStueckTyp
     init(blattStueckTyp:BlattStueckTyp) { self.blattStueckTyp = blattStueckTyp }
-    func setBlattStueckWidth(width:CGFloat){ mainModel.positionenUndFrames.laufZeitWerte.blattStueckEinzugWidth = width }
+    func setBlattStueckWidth(width:CGFloat){
+        switch blattStueckTyp{
+        case .scanModul:        mainModel.positionenUndFrames.laufZeitWerte.blattStueckScannerWidth = width
+        case .oberereinzug:     mainModel.positionenUndFrames.laufZeitWerte.blattStueckEinzugWidth  = width
+        case .UntererEinzug:    mainModel.positionenUndFrames.laufZeitWerte.blattStueckEinzugWidth  = width
+        }
+        
+    }
 }

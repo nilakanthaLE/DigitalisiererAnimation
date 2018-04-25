@@ -28,11 +28,20 @@ class PositionenUndFramesModel{
     }
     
     func getBeweglichesFachTopPosition(angefahrensFach:AngefahrenesFach) -> CGFloat{
-        
         switch angefahrensFach.typ{
-        case .isEingabe:        return fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach
-        case .isAusgabe:        return fineTuningWerte.beweglichesFachUnterEinzug + laufZeitWerte.hoeheFaecherInVertBeweglFach + abstandYzumEingabeFach
-        case .isEinlagerung:    return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        
+        case .Eingabe,.Initial:
+            return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
+        case .EingabeZuOben:
+            return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
+        case .ObenZuEinlagerung:
+            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .EinlagerungZuOben:
+            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .EinlagerungZuUnten:
+            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .Ausgabe:
+            return  abstandYzumEingabeFach - fineTuningWerte.beweglichesFachUnterEinzug - laufZeitWerte.hoeheFaecherInVertBeweglFach + fineTuningWerte.eingabeFachWalzePosition.y
         }
     }
     
@@ -42,6 +51,19 @@ class PositionenUndFramesModel{
     }
 }
 
+struct BlattWerte{
+    let blattDicke:CGFloat                  = 0.5
+    let blattAbstandOffen:CGFloat           = 1.5
+    let blattAbstandGeschlossen:CGFloat     = 1.0
+    
+}
+
+struct FachWerte{
+    //(Ablage)Faecher
+    let klappenHoehe:CGFloat                = 3.0
+    let freiraumLeeresAblagefach:CGFloat    = 3.0
+    let geoffnetesAblageFachHoehe:CGFloat   = 100.0
+}
 class LaufZeitWerte{
     
     
@@ -49,9 +71,12 @@ class LaufZeitWerte{
     var hoeheFaecherInVertBeweglFach:CGFloat                    = 0
     var abstandZurWalzeInAngefahrenemEinalgerungsFach:CGFloat   = 0
     var blattStueckEinzugWidth:CGFloat                          = 0
+    var blattWidth:CGFloat                                      = 0
+    var blattStueckScannerWidth:CGFloat                         = 0
     
     let widthWalze                                              = MutableProperty<CGFloat>(10)
     func setWidthWalze(width:CGFloat){ if width != widthWalze.value{ widthWalze.value = width } }
+    
 }
 
 class FineTuningWerte{

@@ -52,7 +52,7 @@ import ReactiveSwift
     @IBAction func rechteWalzeDoppelTapped(_ sender: UITapGestureRecognizer)    { viewModel.fineTunerFuerWalzeStarten() }
     
     //layoutSubViews
-    override func layoutSubviews() {  viewModel?.fachHoehen.value = frame.width }
+    override func layoutSubviews() {  viewModel?.fachHoehen.value = frame.height }
 }
 
 

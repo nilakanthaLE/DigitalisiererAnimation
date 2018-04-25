@@ -19,19 +19,7 @@ struct EinlagerungsFaecherWerte{
     let abstandY:CGFloat                    = 50
 }
 
-struct BlattWerte{
-    let blattDicke:CGFloat                  = 0.5
-    let blattAbstandOffen:CGFloat           = 2.0
-    let blattAbstandGeschlossen:CGFloat     = 1.0
-    
-}
 
-struct FachWerte{
-    //(Ablage)Faecher
-    let klappenHoehe:CGFloat                = 3.0
-    let freiraumLeeresAblagefach:CGFloat    = 3.0
-    let geoffnetesAblageFachHoehe:CGFloat   = 100.0
-}
 
 struct EinlagerungsFachAnimation{
     let geoffentesFachID:Int
@@ -42,19 +30,56 @@ struct OpenedEinlagerungsFach{
     let einzugDirection:Direction
 }
 struct AngefahrenesFach{
-    enum AngefahrenesFachTyp{ case isEingabe,isAusgabe,isEinlagerung }
-    let typ:AngefahrenesFachTyp
-    // für EinlagerungsFächer:
-    let openedEinlagerungsFach:OpenedEinlagerungsFach
-    
-    init(typ:AngefahrenesFachTyp,openedEinlagerungsFach:OpenedEinlagerungsFach = OpenedEinlagerungsFach(fachID: -1, einzugDirection: .stop)){
+    let typ:BlattBewegungsTyp
+    let einzugDirection:Direction
+    init(typ:BlattBewegungsTyp,einzugDirection:Direction = .stop){
         self.typ                    = typ
-        self.openedEinlagerungsFach = openedEinlagerungsFach
+        self.einzugDirection        = einzugDirection
     }
+    
+    
 }
 
 
-enum BlattBewegungsTyp:Equatable{ case Eingabe,EingabeZuOben,ObenZuEinlagerung(fachID:Int),EinlagerungZuOben(fachID:Int),EinlagerungZuUnten(fachID:Int),Ausgabe }
+enum BlattBewegungsTyp:Equatable{
+    case Eingabe,EingabeZuOben,ObenZuEinlagerung(fachID:Int),EinlagerungZuOben(fachID:Int),EinlagerungZuUnten(fachID:Int),Ausgabe,Initial
+    var fachID:Int{
+        switch self{
+        case .Eingabe: return -1
+        case .EingabeZuOben: return -1
+        case .ObenZuEinlagerung(let fachID):    return fachID
+        case .EinlagerungZuOben(let fachID):    return fachID
+        case .EinlagerungZuUnten(let fachID):   return fachID
+        case .Ausgabe: return -1
+        case .Initial:  return -1
+        }
+    }
+    var positionScanModul:Position{
+        switch self{
+        case .Eingabe:              return .oben
+        case .EingabeZuOben:        return .oben
+        case .ObenZuEinlagerung:    return .oben
+        case .EinlagerungZuOben:    return .oben
+        case .EinlagerungZuUnten:   return .unten
+        case .Ausgabe:              return .oben
+        case .Initial:              return .oben
+        }
+    }
+    var einzugDirectionObererEinzug:Direction   { return self == .Eingabe ? .right : .stop }
+    var einzugDirectionUntererEinzug:Direction  { return self == .Ausgabe ? .left : .stop }
+    var dauerFuerBlattStueck:TimeInterval       {
+        switch self{
+        case .Eingabe:              return 0
+        case .EingabeZuOben:        return mainModel.animationen.dauerBlattStueckEinzuege
+        case .ObenZuEinlagerung:    return mainModel.animationen.dauerBlattStueckScanner
+        case .EinlagerungZuOben:    return mainModel.animationen.dauerBlattStueckScanner
+        case .EinlagerungZuUnten:   return mainModel.animationen.dauerBlattStueckScanner
+        case .Ausgabe:              return mainModel.animationen.dauerBlattStueckEinzuege
+        case .Initial:              return 0
+        }
+    }
+    
+}
 enum ObjektFuerFeinTuning   {
     case WalzeEingabeFach, WalzeLinksFachUnten, WalzeRechtsFachOben, WalzenEinlagerungsFaecher, ScanModulOben, ScanModulUnten, EinzugOben, EinzugUnten
     
@@ -113,25 +138,22 @@ struct GesuchteDokumenteInStapel{
     let fachID:Int
 }
 struct BlattAnimation{
-    var dauer:TimeInterval = mainModel.animationen.blattAnimationDauer
+    var dauer:TimeInterval
     var direction:Direction
     var blattAnimationTyp: BlattAnimationTyp
     var einzelBlattEinzugAnimationBeendet:(()->Void)?
     var completion:(()->Void)? = nil
     var isGesuchtesDokument = false
-    init(){
-        direction                           = .stop
-        blattAnimationTyp                   = .erscheinen
-        einzelBlattEinzugAnimationBeendet   = nil
-    }
     
-    init(direction: Direction, blattAnimationTyp: BlattAnimationTyp, einzelBlattEinzugAnimationBeendet: (()->Void)?,isGesuchtesDokument:Bool = false){
+    init(direction: Direction, blattAnimationTyp: BlattAnimationTyp, einzelBlattEinzugAnimationBeendet: (()->Void)?,isGesuchtesDokument:Bool = false,dauer:TimeInterval = mainModel.animationen.blattAnimationDauer){
+        self.dauer                              = dauer
         self.direction                          = direction
         self.blattAnimationTyp                  = blattAnimationTyp
         self.einzelBlattEinzugAnimationBeendet  = einzelBlattEinzugAnimationBeendet
         self.isGesuchtesDokument                = isGesuchtesDokument
     }
-    init(direction: Direction, blattAnimationTyp: BlattAnimationTyp, completion: (()->Void)?,isGesuchtesDokument:Bool = false){
+    init(direction: Direction, blattAnimationTyp: BlattAnimationTyp, completion: (()->Void)?,isGesuchtesDokument:Bool = false,dauer:TimeInterval = mainModel.animationen.blattAnimationDauer){
+        self.dauer                              = dauer
         self.direction                          = direction
         self.blattAnimationTyp                  = blattAnimationTyp
         self.completion                         = completion

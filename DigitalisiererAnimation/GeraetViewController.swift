@@ -9,6 +9,27 @@
 import UIKit
 import ReactiveSwift
 
+//TestZwecke
+let angefahrenesFachArray = [BlattBewegungsTyp.Ausgabe,
+                             BlattBewegungsTyp.Eingabe,
+                             BlattBewegungsTyp.ObenZuEinlagerung(fachID: 0),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 0),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 1),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 1),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 2),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 2),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 3),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 3),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 4),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 4),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 5),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 5),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 6),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 6),
+                             BlattBewegungsTyp.EinlagerungZuOben(fachID: 7),
+                             BlattBewegungsTyp.EinlagerungZuUnten(fachID: 7)
+]
+
 class GeraetViewController:UIViewController{
     //IBOutlets
     @IBOutlet weak var geraet: Geraet!{didSet{ geraet.viewModel = GeraetViewModel(geraetModel: mainModel.geraetInAktion.geraetModel) } }
@@ -19,9 +40,9 @@ class GeraetViewController:UIViewController{
     @IBAction func ausgabe(_ sender: UIBarButtonItem) { performSegue(withIdentifier: "showDocAuswahl", sender: DokumentenAuswahlViewTyp.Herausfinden) }
     @IBAction func fachPositionAnpassenAction(_ sender: UIBarButtonItem) { }
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        //        model.isEditModus                       = true
-        //        geraetModel.angefahrenesFach.value      = Int(sender.value)
-        //        fachPositionAnpassen.title = geraetModel.angefahrenesFachID + "Position anpassen"
+        mainModel.animationen.geraetAnimationen.startAnimation(blattBewegungsTyp: angefahrenesFachArray[Int(sender.value)])
+        sender.maximumValue = Double(angefahrenesFachArray.count - 1)
+        sender.minimumValue = 0 //Nicht - zu Beginn drücken!
     }
     
     //segues
@@ -39,7 +60,7 @@ class GeraetViewController:UIViewController{
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mainModel.geraetInAktion.angefahrenesFach.value = AngefahrenesFach(typ: .isEingabe)
+        mainModel.geraetInAktion.angefahrenesFach.value = AngefahrenesFach(typ: .Initial)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

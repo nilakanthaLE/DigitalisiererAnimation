@@ -17,7 +17,7 @@ class GeraetInAktionModel{
     
     
     //Animationen starten und beenden
-    let angefahrenesFach                        = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .isEingabe))
+    let angefahrenesFach                        = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     let eingabeFachEinzugDirection              = MutableProperty<Direction>(.stop)
     let oberesFachInVertikalBeweglichDirection  = MutableProperty<Direction>(.stop)
     let unteresFachInVertikalBeweglichDirection = MutableProperty<Direction>(.stop)
@@ -25,10 +25,12 @@ class GeraetInAktionModel{
     //init
     init(){
         geraetModel = GeraetModel(dokumenteInEinlagerungsFaechern: dokumentenStapelModel.dokumenteInEinlagerungsFaechern)
-        geraetModel.eingabeFach.einzugDirection                            <~ eingabeFachEinzugDirection.signal
-        geraetModel.vertikalBeweglichesFach.oberesFach.einzugDirection     <~ oberesFachInVertikalBeweglichDirection.signal
-        geraetModel.vertikalBeweglichesFach.unteresFach.einzugDirection    <~ unteresFachInVertikalBeweglichDirection.signal
-        geraetModel.angefahrenesFach                                       <~ angefahrenesFach.producer
+        geraetModel.eingabeFach.einzugDirection                             <~ eingabeFachEinzugDirection.signal
+        geraetModel.vertikalBeweglichesFach.oberesFach.einzugDirection      <~ oberesFachInVertikalBeweglichDirection.signal
+        geraetModel.vertikalBeweglichesFach.unteresFach.einzugDirection     <~ unteresFachInVertikalBeweglichDirection.signal
+        geraetModel.vertikalBeweglichesFach.obererEinzugDirection           <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionObererEinzug}
+        geraetModel.vertikalBeweglichesFach.untererEinzugDirection          <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionUntererEinzug}
+        geraetModel.angefahrenesFach                                        <~ angefahrenesFach.producer
     }
 }
 
@@ -78,6 +80,7 @@ class DokumentenStapelModel{
             guard let dokument = removeOberestesDokument(aus: .beweglichesFachUnten) else { return nil}
             add(dokument: dokument, zu: .eingabeFach)
             return dokument
+        case .Initial: return nil
         }
     }
     
@@ -127,19 +130,25 @@ class DokumentenStapelModel{
 
 //MARK: Gerät
 class GeraetModel{
-    let angefahrenesFach    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .isEingabe))
+    let angefahrenesFach    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
+    let dokumentFuerScan    = MutableProperty<Dokument?>(nil)
+    let dokumentGesucht     = MutableProperty<Dokument?>(nil)
     
     //Models
     let vertikalBeweglichesFach = VertikalBeweglichesFachModel()
     let eingabeFach             = FachModel(fachTyp: .eingabeFach, anzahlBlaetter: 0)
     let einlagerungsFaecher:EinlagerungsFaecherModel
-    let scanAnzeigeModel                = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .ScanAnzeige)
-    let gesuchtesDokumentAnzeigeModel   = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .GesuchtesDokument)
+    let scanAnzeigeModel:ScanAnzeigeDokumentModel
+    let gesuchtesDokumentAnzeigeModel:ScanAnzeigeDokumentModel
     
     //init
     init(dokumenteInEinlagerungsFaechern:[[Dokument]]){
         einlagerungsFaecher             =  EinlagerungsFaecherModel( anzahlBlaetter: dokumenteInEinlagerungsFaechern.map{$0.count})
-        einlagerungsFaecher.openedFach  <~ angefahrenesFach.signal.map{$0.openedEinlagerungsFach}
+        scanAnzeigeModel                = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .ScanAnzeige,dokumentProperty:dokumentFuerScan,gesucht:dokumentGesucht)
+        gesuchtesDokumentAnzeigeModel   = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .GesuchtesDokument,dokumentProperty:dokumentGesucht)
+        
+        vertikalBeweglichesFach.positionScanModul   <~ angefahrenesFach.signal.map{$0.typ.positionScanModul}
+        einlagerungsFaecher.openedFach              <~ angefahrenesFach.signal
     }
     
 }
@@ -147,30 +156,31 @@ class GeraetModel{
 //MARK: Dokument Scan Anzeige 
 class ScanAnzeigeDokumentModel{
     
-    let gesuchtesDokument       = MutableProperty<Dokument?>(nil)
-    let zuScannendesDokument    = MutableProperty<Dokument?>(nil)
+    
     let isHidden                = MutableProperty<Bool>(true)
     let buchstabeUndZahl        = MutableProperty<BuchstabeUndZahl?>(nil)
     
     let scanGestartet           = MutableProperty<Void>(Void())
     let matching                = MutableProperty<Matching>(.none)
-
-    init(scanAnzeigeTyp:ScanAnzeigeTyp,dokument:Dokument? = nil){
+    
+    let ergebnisMatch           = MutableProperty<Matching>(.none)
+    init(scanAnzeigeTyp:ScanAnzeigeTyp,dokument:Dokument? = nil,dokumentProperty:MutableProperty<Dokument?> = MutableProperty<Dokument?>(nil),gesucht:MutableProperty<Dokument?> = MutableProperty<Dokument?>(nil)){
         switch scanAnzeigeTyp{
-
         case .ScanAnzeige:
-            isHidden            <~ zuScannendesDokument.producer.map{_ in true}
-            buchstabeUndZahl    <~ zuScannendesDokument.producer.map{ BuchstabeUndZahl(title: $0?.title)}
-            scanGestartet       <~ zuScannendesDokument.producer.filter{ $0 != nil }.map{ _ in () }
+            isHidden            <~ dokumentProperty.producer.map{_ in true}
+            matching            <~ dokumentProperty.producer.map{_ in .none}
+            buchstabeUndZahl    <~ dokumentProperty.producer.map{ BuchstabeUndZahl(title: $0?.title)}
+            scanGestartet       <~ dokumentProperty.producer.filter{ $0 != nil }.map{ _ in () }
+            ergebnisMatch       <~ dokumentProperty.producer.map{ gesucht.value == nil ? .none : $0 == gesucht.value ? .matched : .matchedNicht}
         case .GesuchtesDokument:
-            isHidden            <~ gesuchtesDokument.producer.map { $0 == nil }
-            buchstabeUndZahl    <~ gesuchtesDokument.producer.map{ BuchstabeUndZahl(title: $0?.title)}
+            isHidden            <~ dokumentProperty.producer.map { $0 == nil }
+            buchstabeUndZahl    <~ dokumentProperty.producer.map{ BuchstabeUndZahl(title: $0?.title)}
         case .NurAnsicht:
             isHidden.value              = false
             buchstabeUndZahl.value      = BuchstabeUndZahl(title:(dokument?.title))
         }
     }
-    func setMatching(){ matching.value  = gesuchtesDokument.value == nil ? .none : gesuchtesDokument.value == zuScannendesDokument.value ? .matched : .matchedNicht }
+    func setMatching(){ matching.value  = ergebnisMatch.value}
 }
 
 

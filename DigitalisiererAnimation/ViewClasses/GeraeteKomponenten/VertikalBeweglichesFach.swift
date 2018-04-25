@@ -40,5 +40,9 @@ import ReactiveCocoa
     //Tap Gestures
     @IBAction func tapObererEinzug(_ sender: UITapGestureRecognizer)            { viewModel.fineTunerStarten(einzugIsOben: true) }
     @IBAction func tapUntererEinzug(_ sender: UITapGestureRecognizer)           { viewModel.fineTunerStarten(einzugIsOben: false) }
+    
+    override func layoutSubviews() {
+        
+    }
 }
 

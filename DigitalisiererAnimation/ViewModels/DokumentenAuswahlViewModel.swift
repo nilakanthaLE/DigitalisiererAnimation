@@ -33,9 +33,6 @@ class DokumentenAuswahlModel{
         
         var verwendung:TagVerwendung { return tagVerwendung.value }
         
-        
-        
-        
         //Tags
         gewaehlteTags           <~ tagVerwendung.signal.map{_ in [Tag]()}
         gefilterteTags          <~ tagVerwendung.signal.map{_ in Tag.getAll()}
@@ -47,14 +44,7 @@ class DokumentenAuswahlModel{
         
         //Taggen
         var _gewaehlteDokumente:[Dokument]{return gewaehlteDokumente.value}
-//        tagsGewaehltFuerTagging <~ tagVerwendung.signal.map{_ in [Tag]()} //zurücksetzen
-//        tagsGewaehltFuerTagging <~ gewaehlteTags.signal.filter{ _ in verwendung == .TagDokumente}
-//        tagsGewaehltFuerTagging.signal.observeValues {[weak self] tags in
-//            Dokument.setTags(tags, for: _gewaehlteDokumente)
-//        }
-        
-        
-        
+
         //Dokumente gewählt -> Tags (allen Dokumenten gleich) setzen
         gewaehlteTags           <~ gewaehlteDokumente.signal.filter{_ in verwendung == .TagDokumente}.map{Dokument.gemeinsameTags(in: $0)}
 
@@ -62,10 +52,13 @@ class DokumentenAuswahlModel{
     
     static func arrayForIndizes<T>(indizes:Set<IndexPath>,array:[T]) -> [T] { return array.enumerated().filter{ indizes.contains(IndexPath.init(row: $0.offset, section: 0)) }.map{$0.element} }
     func dokumenteEinOderAusgeben(){
-        switch dokumentenAuswahlViewTyp {
-            case .Eingabe:          mainModel.animationen.einlagerung(dokumente: gewaehlteDokumente.value)
-            case .Herausfinden:     mainModel.animationen.heraussuchen(dokumente: gewaehlteDokumente.value)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            switch self.dokumentenAuswahlViewTyp {
+            case .Eingabe:          mainModel.animationen.einlagerung(dokumente:    self.gewaehlteDokumente.value)
+            case .Herausfinden:     mainModel.animationen.heraussuchen(dokumente:   self.gewaehlteDokumente.value)
+            }
         }
+       
     }
     
     func tagging(neueUserWahl:Set<Tag>){

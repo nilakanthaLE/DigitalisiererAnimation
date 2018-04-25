@@ -70,7 +70,7 @@
                         <outlet property="fachPositionAnpassen" destination="c65-7W-aS0" id="xEW-6i-5vI"/>
                         <outlet property="geraet" destination="pab-e4-lsZ" id="ppw-0q-Ggb"/>
                         <segue destination="Zt7-0q-Zxi" kind="modal" identifier="showDocAuswahl" id="36O-EU-tkR"/>
-                        <segue destination="Hf0-cZ-cD0" kind="popover" popoverAnchorBarButtonItem="c65-7W-aS0" id="2Ao-3R-pQh">
+                        <segue destination="Hf0-cZ-cD0" kind="popover" identifier="showFineTuner" popoverAnchorBarButtonItem="c65-7W-aS0" id="2Ao-3R-pQh">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
                     </connections>
