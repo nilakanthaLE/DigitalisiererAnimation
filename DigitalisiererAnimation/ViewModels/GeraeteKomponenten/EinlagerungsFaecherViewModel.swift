@@ -26,7 +26,7 @@ class EinlagerungsFaecherViewModel{
     
     private func updateFachHoehen(fachID:Int){
         // FachHoehen setzen
-        fachHoehen.value = faecherViewModels.map{$0.getEinlagerungsFachHoehe()}
+        fachHoehen.value = faecherViewModels.map{$0.getEinlagerungsFachHoehe() + ($0.fachModel.isOberesFach ? mainModel.positionenUndFrames.fachWerte.klappenHoehe : 0)}
         //setzt den aktuellen Abstand von View.top zur Walze des angefahrenen Einlagerungsfachs
         mainModel.positionenUndFrames.laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach = getWalzeYInGesamtView(von: fachID)
     }

@@ -52,8 +52,7 @@ class PapierStapelViewModel{
             let stapelViewHoehe = frame.height
             let blattWidth      = frame.width
             let stapelHoehe     = mainModel.positionenUndFrames.getPapierStapelHoehe(anzahlBlaetter: fachModel.papierStapelModel.anzahlBlaetter.value, fachGeoeffnet: true)
-            let klappenHoehe    = mainModel.positionenUndFrames.fachWerte.klappenHoehe
-            return atan( (stapelViewHoehe - stapelHoehe - klappenHoehe - 1) / (blattWidth / 2))
+            return atan( (stapelViewHoehe - stapelHoehe - 1) / (blattWidth / 2))
         }
         fachModel.klappWinkel.value = winkel
     }

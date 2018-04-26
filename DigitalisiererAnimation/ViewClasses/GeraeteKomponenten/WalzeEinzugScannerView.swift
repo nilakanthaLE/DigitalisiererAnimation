@@ -47,9 +47,11 @@ import ReactiveSwift
     var viewModel:ScanModulViewModel! {
         didSet{
             viewModel.klappWalzeIsOpen.producer.startWithValues{[weak self] isOpen in self?.animateKlappenDerWalze(isOpen: isOpen)}
-            for walze in einzugWalzen { walze.viewModel = viewModel.getViewModelForEinzugWalze(isOben: walze.tag == 0)}
-            klappWalze.viewModel = viewModel.getViewModelForKlappWalze()
+            for walze in einzugWalzen       { walze.viewModel = viewModel.getViewModelForEinzugWalze(isOben: walze.tag == 0)}
+            for scanModul in scannModule    { scanModul.viewModel = viewModel.getViewModelForScanTeil()}
+            klappWalze.viewModel            = viewModel.getViewModelForKlappWalze()
             viewModel.animateBlattStueck    = blattStueck.animateBlattStueck
+            blattStueckDicke.constant       = viewModel.blattStueckDicke
         }
     }
     
@@ -60,6 +62,7 @@ import ReactiveSwift
     @IBOutlet var einzugWalzen: [Walze]!            { didSet{}}
     @IBOutlet weak var klappWalze: Walze!           { didSet{}}
     @IBOutlet weak var blattStueck: BlattStueck!    {  didSet{ blattStueck.viewModel           = BlattStueckViewModel(blattStueckTyp:.scanModul) } }
+    @IBOutlet weak var blattStueckDicke: NSLayoutConstraint!
     
     //Animationen
     private func animateKlappenDerWalze(isOpen:Bool){
@@ -82,10 +85,12 @@ import ReactiveSwift
             viewModel.animateBlattStueck    = blattStueck.animateBlattStueck
             walzeOben.viewModel   = viewModel.getViewModelForWalze(isOben: true)
             walzeUnten.viewModel  = viewModel.getViewModelForWalze(isOben: false)
+            blattStueckDicke.constant       = viewModel.blattStueckDicke
         }
     }
     
     //IBOutlets
+    @IBOutlet weak var blattStueckDicke: NSLayoutConstraint!
     @IBOutlet private weak var walzeOben: Walze!            { didSet { } }
     @IBOutlet private weak var walzeUnten: Walze!           { didSet { } }
     @IBOutlet private weak var blattStueck: BlattStueck!{
@@ -155,20 +160,29 @@ import ReactiveSwift
     override func draw(_ rect: CGRect) {
         let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
         let path = UIBezierPath()
-        path.addArc(withCenter: center, radius: rect.width / 2, startAngle: 0, endAngle: CGFloat.pi * 2 , clockwise: true)
+        let radius = rect.width / 2
+        path.addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2 , clockwise: true)
         path.close()
-        
-        // fill the path
-        UIColor.red.set()
+        UIColor.darkGray.set()
         path.fill()
+        
+        
         let markierung = UIBezierPath()
+        
         markierung.move(to: CGPoint(x: 0, y: rect.height / 2))
         markierung.addLine(to: CGPoint(x: rect.width, y: rect.height / 2))
         markierung.move(to: CGPoint(x: rect.width / 2 , y: 0))
         markierung.addLine(to: CGPoint(x: rect.width / 2, y: rect.height))
-        markierung.lineWidth = 0.5
-        UIColor.black.set()
+        markierung.lineWidth = 1.5
+        UIColor.lightGray.set()
         markierung.stroke()
+        
+        
+        let path2 = UIBezierPath()
+        path2.addArc(withCenter: center, radius: radius - 4, startAngle: 0, endAngle: CGFloat.pi * 2 , clockwise: true)
+        path2.close()
+        UIColor.lightGray.set()
+        path2.fill()
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
@@ -178,6 +192,8 @@ import ReactiveSwift
 
 //MARK: Scanner
 @IBDesignable class ScanModul:UIView{
+    var viewModel:ScanTeilViewModel!{ didSet{ viewModel.isScanning.signal.observe{[weak self] _ in self?.setNeedsDisplay()} } }
+    
     @IBInspectable var isUnten:Bool = false
     
     //init
@@ -192,9 +208,9 @@ import ReactiveSwift
     
     //drawRect
     override func draw(_ rect: CGRect) {
-        UIColor.red.set()
+        let scannerFarbe:UIColor = viewModel?.isScanning.value == true ? UIColor.yellow : UIColor.lightGray
         let path = UIBezierPath()
-        
+        scannerFarbe.set()
         switch isUnten {
         case true:
             path.move(to: CGPoint(x: 0, y: 0))
@@ -207,6 +223,11 @@ import ReactiveSwift
         }
         path.close()
         path.fill()
+        
+        path.lineWidth = 3.0
+        UIColor.darkGray.set()
+        path.stroke()
+        
         
         let shapeLayer  = CAShapeLayer()
         shapeLayer.path = path.cgPath

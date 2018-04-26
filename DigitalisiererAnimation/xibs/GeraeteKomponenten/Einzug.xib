@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Einzug" customModule="DigitalisiererAnimation">
             <connections>
                 <outlet property="blattStueck" destination="OTU-wj-KGt" id="bfc-kV-ame"/>
+                <outlet property="blattStueckDicke" destination="klQ-s8-Vdl" id="TFP-47-fAY"/>
                 <outlet property="walzeOben" destination="H5N-VV-njw" id="hMC-I1-LqH"/>
                 <outlet property="walzeUnten" destination="GbC-9R-zQF" id="shW-d5-RV9"/>
             </connections>
@@ -56,7 +57,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="OTU-wj-KGt" secondAttribute="trailing" id="M32-NP-eVZ"/>
                         <constraint firstItem="OTU-wj-KGt" firstAttribute="centerY" secondItem="9WG-gU-CTh" secondAttribute="centerY" id="U2E-mt-5ue"/>
@@ -64,7 +64,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Kvl-xF-zVI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="HqJ-PX-pnI"/>
                 <constraint firstItem="Kvl-xF-zVI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="YHt-ZS-Jg7"/>

@@ -43,7 +43,14 @@ class GeraetInAktionVC:UIViewController{
             gehaeuse.layer.cornerRadius = 8
         }
     }
-    
+    @IBOutlet weak var gehaeuseBackground: UIView!{
+        didSet{
+            gehaeuseBackground.layer.borderColor  = UIColor.darkGray.cgColor
+            gehaeuseBackground.layer.borderWidth  = 2
+            gehaeuseBackground.layer.cornerRadius = 8
+            gehaeuseBackground.clipsToBounds        = true
+        }
+    }
     // Animationen
     func animateFachAnfahrt(constant:CGFloat){
         beweglichesFachTop.constant = constant

@@ -18,6 +18,7 @@ import ReactiveSwift
             rechteWalze.viewModel   = viewModel.getViewModelForWalze()
             linkeWalze.viewModel    = viewModel.getViewModelForWalze()
             klappe.viewModel        = viewModel.getViewModelForKlappe()
+            pseudoKlappe.viewModel  = viewModel.getViewModelForKlappe(isPseudoKlappe: true)
             papierStapel.viewModel  = viewModel.getViewModelForPapierStapel()
             
             //WalzenConstraints
@@ -31,11 +32,14 @@ import ReactiveSwift
             
             rechteWalze.isHidden    = viewModel.rechtewalzeIsHidden
             linkeWalze.isHidden     = viewModel.linkeWalzeIsHidden
+            fach.isOberesFach       = viewModel.isOberesFach
         }
     }
 
     //IBOutlets
+    @IBOutlet private weak var fach: Fach!
     @IBOutlet private weak var klappe: Klappe!
+    @IBOutlet private weak var pseudoKlappe: Klappe!
     @IBOutlet private weak var rechteWalze: Walze!
     @IBOutlet private weak var linkeWalze: Walze!
     @IBOutlet private weak var papierStapel: PapierStapelAnimiert!
@@ -87,80 +91,9 @@ import ReactiveSwift
 
 //MARK: Fach
 @IBDesignable class Fach:UIView{
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = UIColor.clear
-    }
+    var isOberesFach:Bool = false{didSet{if isOberesFach {addBorders(edges: [.top], color: .darkGray, thickness: mainModel.positionenUndFrames.fachWerte.klappenHoehe)}}}
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        backgroundColor = UIColor.clear
-        self.addBorders(edges: [.top, .bottom], color: .darkGray, thickness: 1)
+        self.addBorders(edges: [.bottom], color: .darkGray, thickness: 1)
     }
 }
-
-
-
-
-
-
-
-
-//class FachMitKlappeViewModel{
-//    var anzahlBlaetter:Int
-//
-//    //Walzen
-//    var rechteWalzeIsSpinning:MutableProperty<Bool>
-//    var linkeWalzeIsSpinning:MutableProperty<Bool>
-//    var klappeIsOpen:MutableProperty<Bool>
-//    var klappeDirection = Direction.left
-//    var fachDesStapels:FachDesStapels
-//
-//    var klappWinkel = MutableProperty<CGFloat>(0)
-//
-//    //init
-//    init(rechteWalzeIsSpinning:MutableProperty<Bool>,
-//         linkeWalzeIsSpinning:MutableProperty<Bool>,
-//         klappeIsOpen:MutableProperty<Bool>,
-//         anzahlBlaetter:Int ,
-//         klappeDirection:Direction,
-//         fachDesStapels:FachDesStapels
-//        ){
-//
-//        self.rechteWalzeIsSpinning  = rechteWalzeIsSpinning
-//        self.linkeWalzeIsSpinning   = linkeWalzeIsSpinning
-//        self.klappeIsOpen           = klappeIsOpen
-//        self.anzahlBlaetter         = anzahlBlaetter
-//        self.klappeDirection        = klappeDirection
-//        self.fachDesStapels         = fachDesStapels
-//    }
-//
-//
-//
-//    var isEingabefach = false //weg
-//    //MARK: helper
-//    func getViewModelForKlappe()->KlappeViewModel   { return KlappeViewModel(klappWinkel: klappWinkel, direction: klappeDirection, fachDesStapels: fachDesStapels) }
-//    func toggleLinkewalzeSpinning()                 { linkeWalzeIsSpinning.value = !linkeWalzeIsSpinning.value}
-//    func toggleRechtewalzeSpinning()                { rechteWalzeIsSpinning.value = !rechteWalzeIsSpinning.value}
-//    func toggleKlappe()                             { klappeIsOpen.value = !klappeIsOpen.value}
-//    func setKlappeDirection(isLeft:Bool,ohne:Bool)  { klappeDirection = ohne ? .stop : isLeft ? .left : .right }
-//    func getViewModelForPapierStapel() -> PapierStapelViewModel {
-//        return PapierStapelViewModel(anzahlBlaetter: anzahlBlaetter,fachDesStapels:fachDesStapels, blattDicke: model.blattDicke, blattAbstandOffen: model.blattAbstandOffen, blattAbstandGeschlossen: model.blattAbstandGeschlossen)
-//    }
-//}
-
-//class KlappeViewModel{
-//    var farbe:UIColor = .green
-//    var direction:Direction
-//    var hasBorder = false
-//    var fachDesStapels:FachDesStapels
-//
-//    var klappWinkel:MutableProperty<CGFloat>
-//
-//    init(klappWinkel:MutableProperty<CGFloat>, direction:Direction,hasBorder:Bool = true,fachDesStapels:FachDesStapels, farbe:UIColor = .black){
-//        self.direction      = direction
-//        self.hasBorder      = hasBorder
-//        self.fachDesStapels = fachDesStapels
-//        self.klappWinkel    = klappWinkel
-//        self.farbe          = farbe
-//    }
-//}

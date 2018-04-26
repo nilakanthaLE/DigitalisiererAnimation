@@ -37,7 +37,6 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8h8-Af-3OQ" customClass="Einzug" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="23" width="50" height="100"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="8fy-Ll-342"/>
@@ -49,7 +48,6 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TK7-2T-h70" customClass="Einzug" customModule="DigitalisiererAnimation">
                                     <rect key="frame" x="0.0" y="475.5" width="50" height="100"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="TG8-61-aXo"/>
@@ -60,7 +58,6 @@
                                     </connections>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="8h8-Af-3OQ" secondAttribute="trailing" id="11k-kN-mQk"/>
                                 <constraint firstItem="8h8-Af-3OQ" firstAttribute="top" secondItem="fJZ-d1-p6S" secondAttribute="top" constant="23" id="FhM-Z3-ebG"/>
@@ -73,19 +70,16 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlq-PI-LoH" customClass="FachMitKlappe" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="736" height="435.5"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
                                 </view>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPT-14-O2X" customClass="FachMitKlappe" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="435.5" width="736" height="435.5"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
                                 </view>
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j05-IJ-dTh" customClass="BeweglicherDoppelEinzugScanModul" customModule="DigitalisiererAnimation">
                             <rect key="frame" x="786" y="0.0" width="147" height="871"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <gestureRecognizers/>
                         </view>
                     </subviews>
@@ -95,7 +89,6 @@
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yoq-ku-1jt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GFx-NN-WBQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yoq-ku-1jt" secondAttribute="trailing" id="dMk-N3-PiS"/>

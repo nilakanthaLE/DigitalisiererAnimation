@@ -30,18 +30,12 @@ class PositionenUndFramesModel{
     func getBeweglichesFachTopPosition(angefahrensFach:AngefahrenesFach) -> CGFloat{
         switch angefahrensFach.typ{
         
-        case .Eingabe,.Initial:
-            return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
-        case .EingabeZuOben:
-            return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
-        case .ObenZuEinlagerung:
-            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
-        case .EinlagerungZuOben:
-            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
-        case .EinlagerungZuUnten:
-            return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
-        case .Ausgabe:
-            return  abstandYzumEingabeFach - fineTuningWerte.beweglichesFachUnterEinzug - laufZeitWerte.hoeheFaecherInVertBeweglFach + fineTuningWerte.eingabeFachWalzePosition.y
+        case .Eingabe,.Initial:     return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
+        case .EingabeZuOben:        return -fineTuningWerte.beweglichesFachObererEinzug + abstandYzumEingabeFach + fineTuningWerte.eingabeFachWalzePosition.y
+        case .ObenZuEinlagerung:    return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .EinlagerungZuOben:    return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .EinlagerungZuUnten:   return laufZeitWerte.abstandZurWalzeInAngefahrenemEinalgerungsFach - laufZeitWerte.abstandTopZurKlappWalzeInVertBeweglFach + einlagerungsFaecherwerte.abstandY
+        case .Ausgabe:              return abstandYzumEingabeFach - fineTuningWerte.beweglichesFachUnterEinzug - laufZeitWerte.hoeheFaecherInVertBeweglFach + fineTuningWerte.eingabeFachWalzePosition.y
         }
     }
     

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 let anzahlEinlagerungsFaecher                       = 8
 var mainModel:MainModel = MainModel()
-
+let gehaeuseFarbe                                   = UIColor.init(red: 225/256, green: 166/256, blue: 82/256, alpha: 0.5)
 
 
 class MainModel{

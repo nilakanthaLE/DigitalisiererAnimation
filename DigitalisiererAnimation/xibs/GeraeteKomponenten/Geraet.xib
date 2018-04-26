@@ -19,6 +19,7 @@
                 <outlet property="beweglichesFachTop" destination="5zW-vt-FKO" id="x9Q-SB-fd3"/>
                 <outlet property="eingabeFach" destination="Yud-5v-hjz" id="Pzr-i9-GOS"/>
                 <outlet property="gehaeuse" destination="woA-gU-JE9" id="IUR-0L-tmt"/>
+                <outlet property="gehaeuseBackground" destination="Psg-8q-zL4" id="Ir1-rl-08d"/>
                 <outlet property="gesuchtesDokumentView" destination="oDm-7a-PtT" id="hhb-j6-cNl"/>
                 <outlet property="scanDokumentView" destination="7vH-1e-wWE" id="fYl-KE-8du"/>
             </connections>
@@ -28,8 +29,9 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woA-gU-JE9" userLabel="Gehause">
-                    <rect key="frame" x="214" y="0.0" width="809.5" height="768"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psg-8q-zL4" userLabel="Gehause hinten">
+                    <rect key="frame" x="107" y="0.0" width="809.5" height="768"/>
+                    <color key="backgroundColor" red="0.89812024109999999" green="0.78332101949999999" blue="0.61907479740000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yud-5v-hjz" userLabel="EingabeFach" customClass="FachMitKlappe" customModule="DigitalisiererAnimation">
                     <rect key="frame" x="0.0" y="120" width="314.5" height="77"/>
@@ -46,6 +48,9 @@
                     <rect key="frame" x="314.5" y="21" width="395" height="153.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <gestureRecognizers/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woA-gU-JE9" userLabel="Gehause">
+                    <rect key="frame" x="214" y="0.0" width="809.5" height="768"/>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-KV-W2y">
                     <rect key="frame" x="30" y="217" width="154.5" height="438"/>
@@ -71,7 +76,10 @@
                 <constraint firstItem="8m8-HR-kRc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="1" id="5zW-vt-FKO"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zuw-ZH-bpG" secondAttribute="trailing" id="Ego-96-hiW"/>
                 <constraint firstItem="woA-gU-JE9" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="HrR-cT-IMo"/>
+                <constraint firstItem="Psg-8q-zL4" firstAttribute="leading" secondItem="woA-gU-JE9" secondAttribute="leading" id="OHb-e5-twx"/>
                 <constraint firstItem="woA-gU-JE9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OVl-kW-n7v"/>
+                <constraint firstItem="Psg-8q-zL4" firstAttribute="trailing" secondItem="woA-gU-JE9" secondAttribute="trailing" id="VZJ-kJ-teO"/>
+                <constraint firstItem="Psg-8q-zL4" firstAttribute="top" secondItem="woA-gU-JE9" secondAttribute="top" id="YC4-j6-aFi"/>
                 <constraint firstItem="zuw-ZH-bpG" firstAttribute="leading" secondItem="8m8-HR-kRc" secondAttribute="trailing" id="Ycp-QU-zUc"/>
                 <constraint firstItem="woA-gU-JE9" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="bcc-m3-27d"/>
                 <constraint firstItem="zuw-ZH-bpG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e0y-VC-eT9"/>
@@ -80,6 +88,7 @@
                 <constraint firstItem="8I5-KV-W2y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="kA5-TL-Ejd"/>
                 <constraint firstItem="8I5-KV-W2y" firstAttribute="top" secondItem="Yud-5v-hjz" secondAttribute="bottom" constant="20" id="lZH-Xu-gAx"/>
                 <constraint firstItem="zuw-ZH-bpG" firstAttribute="width" secondItem="8m8-HR-kRc" secondAttribute="width" constant="-80" id="myQ-xZ-FB3"/>
+                <constraint firstItem="Psg-8q-zL4" firstAttribute="bottom" secondItem="woA-gU-JE9" secondAttribute="bottom" id="nc8-Bs-j0f"/>
                 <constraint firstItem="Yud-5v-hjz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="sXC-yo-zWJ"/>
                 <constraint firstItem="8m8-HR-kRc" firstAttribute="height" secondItem="zuw-ZH-bpG" secondAttribute="height" multiplier="1:5" id="sax-Fm-hAx"/>
                 <constraint firstItem="Yud-5v-hjz" firstAttribute="height" secondItem="8m8-HR-kRc" secondAttribute="height" multiplier="1:2" id="sed-50-ZqS"/>

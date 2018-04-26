@@ -41,10 +41,12 @@ class FachModel{
     let klappeDirection:Direction
     let papierStapelModel:PapierStapelModel
     let fachTyp:FachTyp
+    let isOberesFach:Bool
     init(fachTyp:FachTyp, anzahlBlaetter:Int){
         self.fachTyp            = fachTyp
         klappeDirection         = fachTyp.klappeDirection
         papierStapelModel       = PapierStapelModel(anzahlBlaetter:anzahlBlaetter, klappDirection: klappeDirection,klappWinkel:klappWinkel, fachIsGeschlossen: fachIsGeschlossen)
+        isOberesFach            = fachTyp == .einlagerungsFach(0) || fachTyp == .beweglichesFachOben || fachTyp == .eingabeFach
     }
     
 }
@@ -55,17 +57,38 @@ class ScanModulModel{
     let position                        = MutableProperty<Position>(.oben)
     let isScanning                      = MutableProperty<Bool>(false)
     let klappWalzeIsOpen                = MutableProperty<Bool>(false)
-    init(position:MutableProperty<Position>){ self.position <~ position.signal }
+    init(position:MutableProperty<Position>,klappWalzeIsOpen:MutableProperty<Bool>,einzugDirection:MutableProperty<Direction>,
+         isScanning:MutableProperty<Bool>){
+        self.position           <~ position.signal
+        self.klappWalzeIsOpen   <~ klappWalzeIsOpen.signal
+        self.einzugDirection    <~ einzugDirection.signal
+        self.isScanning         <~ isScanning.signal
+    }
 }
 
 class VertikalBeweglichesFachModel{
-    let oberesFach              = FachModel(fachTyp: .beweglichesFachOben, anzahlBlaetter: 0)
-    let unteresFach             = FachModel(fachTyp: .beweglichesFachUnten, anzahlBlaetter: 0 )
-    let obererEinzugDirection   = MutableProperty<Direction>(.stop)
-    let untererEinzugDirection  = MutableProperty<Direction>(.stop)
-    let positionScanModul   = MutableProperty<Position>(.oben)
+    let oberesFach                  = FachModel(fachTyp: .beweglichesFachOben, anzahlBlaetter: 0)
+    let unteresFach                 = FachModel(fachTyp: .beweglichesFachUnten, anzahlBlaetter: 0 )
+    let obererEinzugDirection       = MutableProperty<Direction>(.stop)
+    let untererEinzugDirection      = MutableProperty<Direction>(.stop)
+    
+    
+    
     let scanModulModel:ScanModulModel
-    init(){ scanModulModel = ScanModulModel(position: positionScanModul) }
+    let positionScanModul           = MutableProperty<Position>(.oben)
+    let klappWalzeIsOpen            = MutableProperty<Bool>(false)
+    let scanModulEinzugDirection    = MutableProperty<Direction>(.stop)
+    
+    init(angefahrenesFach:MutableProperty<AngefahrenesFach>,isScanning:MutableProperty<Bool>){
+        scanModulModel = ScanModulModel(position: positionScanModul, klappWalzeIsOpen: klappWalzeIsOpen, einzugDirection: scanModulEinzugDirection, isScanning: isScanning)
+        positionScanModul               <~ angefahrenesFach.signal.map{$0.typ.positionScanModul}
+        obererEinzugDirection           <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionObererEinzug}
+        untererEinzugDirection          <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionUntererEinzug}
+        klappWalzeIsOpen                <~ angefahrenesFach.producer.map{$0.typ.klappWalzeIsOpen}
+        scanModulEinzugDirection        <~ angefahrenesFach.producer.map{$0.typ.scanModulEinzugDirection}
+        oberesFach.einzugDirection      <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionOberesFach}
+        unteresFach.einzugDirection     <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionUnteresFach}
+    }
 }
 
 class PapierStapelModel{

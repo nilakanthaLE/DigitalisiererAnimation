@@ -21,6 +21,11 @@ class GeraetViewModel{
     init(geraetModel:GeraetModel){
         self.geraetModel = geraetModel
         beweglichesFachTopPosition <~ geraetModel.angefahrenesFach.producer.map{mainModel.positionenUndFrames.getBeweglichesFachTopPosition(angefahrensFach: $0)}
+        
+        //delay, damit erst abstandZurWalzeInAngefahrenemEinalgerungsFach gestzt wird, bevor es hier Verwendung findet
+        geraetModel.angefahrenesFach.producer.startWithValues {[weak self] angefahrenesFach in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self?.beweglichesFachTopPosition.value = mainModel.positionenUndFrames.getBeweglichesFachTopPosition(angefahrensFach: angefahrenesFach) }  }
+        
     }
     
     //ViewModels

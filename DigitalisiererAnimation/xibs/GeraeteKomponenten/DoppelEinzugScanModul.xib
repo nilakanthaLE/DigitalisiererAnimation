@@ -14,6 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoppelEinzugScanModul" customModule="DigitalisiererAnimation">
             <connections>
                 <outlet property="blattStueck" destination="qog-01-HGL" id="OXv-41-LkF"/>
+                <outlet property="blattStueckDicke" destination="BWB-h5-lIl" id="rAY-Kj-sCh"/>
                 <outlet property="klappWalze" destination="NYS-NK-KiG" id="zF0-T8-i8X"/>
                 <outlet property="klappWalzenView" destination="TKc-BZ-3he" id="Yeg-MB-Fuq"/>
                 <outletCollection property="einzugWalzen" destination="xa4-1F-TkG" collectionClass="NSMutableArray" id="kEy-rh-UGC"/>
@@ -40,7 +41,6 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="874-8J-YIL">
                                             <rect key="frame" x="0.0" y="0.0" width="252" height="252"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xa4-1F-TkG" userLabel="Walze_oben" customClass="Walze" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="254" width="252" height="252"/>
@@ -57,7 +57,6 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ya8-gp-sZ4">
                                             <rect key="frame" x="0.0" y="0.0" width="252" height="252"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-Jv-DC8" userLabel="Scan Modul oben" customClass="ScanModul" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="254" width="252" height="252"/>
@@ -66,7 +65,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isUnten" value="NO"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K84-Mj-khI" customClass="ScanModul" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K84-Mj-khI" customClass="ScanModul" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="508" width="252" height="252"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <userDefinedRuntimeAttributes>
@@ -83,15 +82,12 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNj-KS-H7O">
                                                     <rect key="frame" x="0.0" y="0.0" width="251.5" height="252"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPF-HB-MWU" customClass="Walze" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="254" width="251.5" height="252.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmS-jk-UQ2" customClass="Walze" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="508.5" width="251.5" height="252"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
@@ -103,7 +99,6 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYS-NK-KiG" customClass="Walze" customModule="DigitalisiererAnimation" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="252" height="252"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekq-J0-VBT">
                                                             <rect key="frame" x="0.0" y="254" width="252" height="252"/>
@@ -122,7 +117,6 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="TKc-BZ-3he" firstAttribute="leading" secondItem="Abb-Y3-IAX" secondAttribute="leading" id="3xX-mQ-jZH"/>
                                         <constraint firstAttribute="bottom" secondItem="TKc-BZ-3he" secondAttribute="bottom" id="6Xw-ga-YrO"/>
@@ -147,7 +141,6 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.94375056030000004" green="0.59539538619999999" blue="0.21537679430000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="qog-01-HGL" secondAttribute="trailing" id="HUR-9t-tBN"/>
                                 <constraint firstItem="qog-01-HGL" firstAttribute="centerY" secondItem="eKD-Ib-dKT" secondAttribute="centerY" id="jWK-ZW-RZ7"/>
@@ -155,7 +148,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="eKD-Ib-dKT" firstAttribute="bottom" secondItem="DiY-Dh-eK5" secondAttribute="top" id="4Xj-Zk-o2u"/>
                         <constraint firstItem="Lvw-zu-FkH" firstAttribute="leading" secondItem="Vzk-dE-aYK" secondAttribute="leading" id="Ayj-VS-tRr"/>

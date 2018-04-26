@@ -16,7 +16,6 @@ class BeweglichesScanModulViewModel{
     init(scanModulModel:ScanModulModel) {
         self.scanModulModel         = scanModulModel
         abstandVonOben              <~ scanModulModel.position.producer.map {mainModel.positionenUndFrames.fineTuningWerte.getAbstandScanModul(fuer: $0)}
-//        scanModulModel.position     <~ position.signal
         scanModulModel.position     <~ mainModel.positionenUndFrames.fineTuningWerte.fineTuningUpdate.signal.map{[weak self] _ in self?.position.value ?? .oben}
     }
     func setPosition(swipeDirection:UISwipeGestureRecognizerDirection)  { position.value    = swipeDirection == .up ? .oben : .unten }
@@ -29,25 +28,35 @@ class BeweglichesScanModulViewModel{
 class ScanModulViewModel{
     let isScanning                  = MutableProperty<Bool>(false)
     let einzugDirection             = MutableProperty<Direction>(.stop)
+    let klappWalzeDirection         = MutableProperty<Direction>(.stop)
     let klappWalzeIsOpen            = MutableProperty<Bool>(false)
+    let blattStueckDicke            = mainModel.positionenUndFrames.blattWerte.blattDicke
     
     init(scanModulModel:ScanModulModel) {
         self.isScanning             <~ scanModulModel.isScanning.signal
         self.einzugDirection        <~ scanModulModel.einzugDirection.signal
         self.klappWalzeIsOpen       <~ scanModulModel.klappWalzeIsOpen.signal
+        klappWalzeDirection         <~ einzugDirection.signal.map{scanModulModel.klappWalzeIsOpen.value ? $0 : .stop}
         mainModel.animationen.blattAnimationen.set(closure: animateBlattStueck, blattStueckTyp: .scanModul)
     }
     //ViewModel
-    func getViewModelForKlappWalze() -> WalzeViewModel              { return WalzeViewModel(einzugDirection: einzugDirection,isOben:true)}
+    func getViewModelForKlappWalze() -> WalzeViewModel              { return WalzeViewModel(einzugDirection: klappWalzeDirection,isOben:true)}
     func getViewModelForEinzugWalze(isOben:Bool) -> WalzeViewModel  { return WalzeViewModel(einzugDirection: einzugDirection,isOben:isOben)}
+    func getViewModelForScanTeil()->ScanTeilViewModel               { return ScanTeilViewModel(isScanning: isScanning)}
     
     //Animationen (Closure)
     var animateBlattStueck:((BlattAnimation)->Void)?                                                    //wird von View gesetzt
     private func animateBlattStueck(animation:BlattAnimation)       { animateBlattStueck?(animation) }  //wird von Animationen gecalled
 }
+class ScanTeilViewModel{
+    let isScanning                  = MutableProperty<Bool>(false)
+    init(isScanning:MutableProperty<Bool>){  self.isScanning <~ isScanning  }
+}
+
 
 //MARK: Einzüge
 class EinzugViewModel{
+    let blattStueckDicke            = mainModel.positionenUndFrames.blattWerte.blattDicke
     let einzugDirection = MutableProperty<Direction>(Direction.stop)
     init(einzugDirection:MutableProperty<Direction>,fachTyp:FachTyp) {
         self.einzugDirection <~ einzugDirection.producer

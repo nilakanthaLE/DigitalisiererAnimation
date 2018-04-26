@@ -39,6 +39,7 @@ class PapierStapelAnimiert:PapierStapel{
     }
     //fallendes Blatt
     private func animateFallendesBlatt(duration:TimeInterval = 1,completion:(()->Void)?){
+        mainModel.animationen.geraetAnimationen.isScanning.value    = false
         UIView.animate(withDuration: duration, animations: { self.fallBlatt.frame = self.fallBlattFrameBottom })
         { _ in
             self.fallBlatt.isHidden = true
@@ -140,7 +141,7 @@ class PapierStapel:NibLoadingView{
     }
     private func initFallBlatt(){
         fallBlatt                       = UIView()
-        fallBlatt.backgroundColor       = .blue
+        fallBlatt.backgroundColor       = .darkGray
         fallBlatt.frame                 = fallBlattFrameTop
         fallBlatt.isHidden              = true
         view.addSubview(fallBlatt)

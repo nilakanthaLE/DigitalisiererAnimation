@@ -65,8 +65,21 @@ enum BlattBewegungsTyp:Equatable{
         case .Initial:              return .oben
         }
     }
-    var einzugDirectionObererEinzug:Direction   { return self == .Eingabe ? .right : .stop }
+    var einzugDirectionEingabeFach:Direction    { return self == .EingabeZuOben ? .right : .stop }
+    var einzugDirectionObererEinzug:Direction   { return self == .EingabeZuOben ? .right : .stop }
     var einzugDirectionUntererEinzug:Direction  { return self == .Ausgabe ? .left : .stop }
+    var einzugDirectionOberesFach:Direction     {
+        switch self{
+        case .Eingabe,.EingabeZuOben,.Ausgabe,.Initial,.EinlagerungZuUnten,.EinlagerungZuOben:  return .stop
+        case .ObenZuEinlagerung:                                                                return .right
+        }
+    }
+    var einzugDirectionUnteresFach:Direction     {
+        switch self{
+        case .Eingabe,.EingabeZuOben,.ObenZuEinlagerung,.EinlagerungZuOben,.Initial,.EinlagerungZuUnten:    return .stop
+        case .Ausgabe:                                                                                      return .left
+        }
+    }
     var dauerFuerBlattStueck:TimeInterval       {
         switch self{
         case .Eingabe:              return 0
@@ -76,6 +89,20 @@ enum BlattBewegungsTyp:Equatable{
         case .EinlagerungZuUnten:   return mainModel.animationen.dauerBlattStueckScanner
         case .Ausgabe:              return mainModel.animationen.dauerBlattStueckEinzuege
         case .Initial:              return 0
+        }
+    }
+    var klappWalzeIsOpen:Bool{
+        switch self{
+        case .Eingabe,.EingabeZuOben,.ObenZuEinlagerung,.Ausgabe,.Initial:  return false
+        case .EinlagerungZuOben,.EinlagerungZuUnten:                        return true
+        } 
+    }
+    var scanModulEinzugDirection:Direction{
+        switch self{
+        case .Eingabe,.EingabeZuOben,.Ausgabe,.Initial:                     return .stop
+        case .ObenZuEinlagerung:                                            return .right
+        case .EinlagerungZuOben:                                            return .left
+        case .EinlagerungZuUnten:                                           return .left
         }
     }
     

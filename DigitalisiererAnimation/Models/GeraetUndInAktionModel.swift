@@ -12,25 +12,17 @@ import ReactiveSwift
 //MARK: Gerät in Aktion
 class GeraetInAktionModel{
     //Models
-    let geraetModel:GeraetModel
     let dokumentenStapelModel           = DokumentenStapelModel()
     
     
     //Animationen starten und beenden
-    let angefahrenesFach                        = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
-    let eingabeFachEinzugDirection              = MutableProperty<Direction>(.stop)
-    let oberesFachInVertikalBeweglichDirection  = MutableProperty<Direction>(.stop)
-    let unteresFachInVertikalBeweglichDirection = MutableProperty<Direction>(.stop)
+    let angefahrenesFach                = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
+    let isScanning                      = MutableProperty<Bool>(false)
     
     //init
+    let geraetModel:GeraetModel
     init(){
-        geraetModel = GeraetModel(dokumenteInEinlagerungsFaechern: dokumentenStapelModel.dokumenteInEinlagerungsFaechern)
-        geraetModel.eingabeFach.einzugDirection                             <~ eingabeFachEinzugDirection.signal
-        geraetModel.vertikalBeweglichesFach.oberesFach.einzugDirection      <~ oberesFachInVertikalBeweglichDirection.signal
-        geraetModel.vertikalBeweglichesFach.unteresFach.einzugDirection     <~ unteresFachInVertikalBeweglichDirection.signal
-        geraetModel.vertikalBeweglichesFach.obererEinzugDirection           <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionObererEinzug}
-        geraetModel.vertikalBeweglichesFach.untererEinzugDirection          <~ angefahrenesFach.producer.map{$0.typ.einzugDirectionUntererEinzug}
-        geraetModel.angefahrenesFach                                        <~ angefahrenesFach.producer
+        geraetModel = GeraetModel(dokumenteInEinlagerungsFaechern: dokumentenStapelModel.dokumenteInEinlagerungsFaechern, angefahrenesFach: angefahrenesFach, isScanning: isScanning)
     }
 }
 
@@ -50,7 +42,7 @@ class DokumentenStapelModel{
     
 
     //Stapel updaten
-    func update(dokument:Dokument? = nil, blattBewegungsTyp:BlattBewegungsTyp) -> Dokument?{
+    func update(dokument:Dokument? = nil, blattBewegungsTyp:BlattBewegungsTyp, isUmstapelnEinBlatt:Bool = false) -> Dokument?{
         switch blattBewegungsTyp{
             
         case .Eingabe:
@@ -62,9 +54,7 @@ class DokumentenStapelModel{
             add(dokument: dokument, zu: .beweglichesFachOben)
             return dokument
         case .ObenZuEinlagerung(let fachID):
-            guard nextEinlagerungsFach == fachID else {
-                print ("update ObenZuEinlagerung -> nextEinlagerungsFach == fachID")
-                return nil }
+            guard nextEinlagerungsFach == fachID || isUmstapelnEinBlatt else { return nil }
             guard let dokument = removeOberestesDokument(aus: .beweglichesFachOben) else { return nil}
             add(dokument: dokument, zu: .einlagerungsFach(fachID))
             return dokument
@@ -130,25 +120,26 @@ class DokumentenStapelModel{
 
 //MARK: Gerät
 class GeraetModel{
-    let angefahrenesFach    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     let dokumentFuerScan    = MutableProperty<Dokument?>(nil)
     let dokumentGesucht     = MutableProperty<Dokument?>(nil)
-    
+    let angefahrenesFach    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     //Models
-    let vertikalBeweglichesFach = VertikalBeweglichesFachModel()
-    let eingabeFach             = FachModel(fachTyp: .eingabeFach, anzahlBlaetter: 0)
+    
+    let eingabeFach         = FachModel(fachTyp: .eingabeFach, anzahlBlaetter: 0)
     let einlagerungsFaecher:EinlagerungsFaecherModel
     let scanAnzeigeModel:ScanAnzeigeDokumentModel
     let gesuchtesDokumentAnzeigeModel:ScanAnzeigeDokumentModel
     
     //init
-    init(dokumenteInEinlagerungsFaechern:[[Dokument]]){
-        einlagerungsFaecher             =  EinlagerungsFaecherModel( anzahlBlaetter: dokumenteInEinlagerungsFaechern.map{$0.count})
+    let vertikalBeweglichesFach:VertikalBeweglichesFachModel
+    init(dokumenteInEinlagerungsFaechern:[[Dokument]],angefahrenesFach:MutableProperty<AngefahrenesFach>,isScanning:MutableProperty<Bool>){
+        einlagerungsFaecher             = EinlagerungsFaecherModel( anzahlBlaetter: dokumenteInEinlagerungsFaechern.map{$0.count})
         scanAnzeigeModel                = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .ScanAnzeige,dokumentProperty:dokumentFuerScan,gesucht:dokumentGesucht)
         gesuchtesDokumentAnzeigeModel   = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .GesuchtesDokument,dokumentProperty:dokumentGesucht)
-        
-        vertikalBeweglichesFach.positionScanModul   <~ angefahrenesFach.signal.map{$0.typ.positionScanModul}
-        einlagerungsFaecher.openedFach              <~ angefahrenesFach.signal
+        vertikalBeweglichesFach         = VertikalBeweglichesFachModel(angefahrenesFach: angefahrenesFach, isScanning: isScanning)
+        self.angefahrenesFach           <~ angefahrenesFach.signal
+        einlagerungsFaecher.openedFach  <~ angefahrenesFach.signal
+        eingabeFach.einzugDirection     <~ angefahrenesFach.signal.map{$0.typ.einzugDirectionEingabeFach}
     }
     
 }

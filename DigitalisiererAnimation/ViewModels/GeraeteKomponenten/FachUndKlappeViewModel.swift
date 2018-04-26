@@ -18,6 +18,7 @@ class FachMitKlappeUndPapierStapelViewModel{
     let widthWalze              = MutableProperty<CGFloat>(10)
     let linkeWalzeIsHidden:Bool
     let rechtewalzeIsHidden:Bool
+    let isOberesFach:Bool
     
     //init
     let fachModel:FachModel
@@ -28,6 +29,7 @@ class FachMitKlappeUndPapierStapelViewModel{
         widthWalze          <~ mainModel.positionenUndFrames.laufZeitWerte.widthWalze.producer
         linkeWalzeIsHidden  = fachModel.fachTyp.linkeWalzeIsHidden
         rechtewalzeIsHidden = fachModel.fachTyp.rechteWalzeIsHidden
+        isOberesFach        = fachModel.isOberesFach
         
         func updateWalzenPos(){
             linkeWalzePosition.value    = mainModel.positionenUndFrames.fineTuningWerte.getWalzenPos(fuer: fachModel.fachTyp)
@@ -37,9 +39,9 @@ class FachMitKlappeUndPapierStapelViewModel{
     }
     
     //ViewModels
-    func getViewModelForWalze()-> WalzeViewModel                    { return WalzeViewModel(einzugDirection: fachModel.einzugDirection, isOben: true)}
-    func getViewModelForKlappe()->KlappeViewModel                   { return KlappeViewModel(fachModel: fachModel) }
-    func getViewModelForPapierStapel() -> PapierStapelViewModel     { return PapierStapelViewModel(fachModel: fachModel)  }
+    func getViewModelForWalze()-> WalzeViewModel                                { return WalzeViewModel(einzugDirection: fachModel.einzugDirection, isOben: true)}
+    func getViewModelForKlappe(isPseudoKlappe:Bool = false) ->KlappeViewModel   { return KlappeViewModel(fachModel: fachModel,isPseudoKlappe:isPseudoKlappe) }
+    func getViewModelForPapierStapel() -> PapierStapelViewModel                 { return PapierStapelViewModel(fachModel: fachModel)  }
     
     //helper
     func getEinlagerungsFachHoehe()->CGFloat{
@@ -57,8 +59,8 @@ class KlappeViewModel{
     
     //init
     let direction:Direction
-    init(fachModel:FachModel){
-        self.direction      = fachModel.klappeDirection
-        self.klappWinkel    <~ fachModel.klappWinkel.signal
+    init(fachModel:FachModel, isPseudoKlappe:Bool = false){
+        self.direction      = isPseudoKlappe ?  fachModel.klappeDirection.opposite : fachModel.klappeDirection
+        if !isPseudoKlappe{ self.klappWinkel    <~ fachModel.klappWinkel.signal }
     }
 }

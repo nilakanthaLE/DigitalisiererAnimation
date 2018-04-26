@@ -21,6 +21,7 @@ class AnimationenModel{
         func erledigt()     { geraetAnimationen.startAnimation(blattBewegungsTyp: .Initial) }
         func herausgabe()   { umstapeln(blattBewegungsTyp: .Ausgabe, completion: erledigt) }
         func heraussuchenEinFach(){
+            print("-> heraussuchenEinFach gesuchteDokumenteInStapel.count: \(gesuchteDokumenteInStapel.count)")
             guard gesuchteDokumenteInStapel.count > 0 else {herausgabe(); return }
             //sucht alle gesuchten Dokumente eines Einlagerungsfachs heraus
             // lagert diese in unteres Fach zwischen
@@ -30,6 +31,7 @@ class AnimationenModel{
             let dokInStapel = mainModel.geraetInAktion.dokumentenStapelModel.dokumenteInEinlagerungsFaechern[dokumenteInEinemStapel.fachID]
             
             func einDokumentInStapelFinden(){
+                print("------> einDokumentInStapelFinden gesuchteDokumente.count: \(gesuchteDokumente.count)")
                 guard gesuchteDokumente.count > 0 else {
                     //alle gesuchten Dokumente des Fachs liegen im unteren Fach
                     // stapelt alle Dokumente aus Fach oben zurück ins Einlagerungsfach
@@ -83,14 +85,22 @@ class AnimationenModel{
     }
     private func umstapeln(blattBewegungsTyp: BlattBewegungsTyp,gesuchtesDokument:Dokument,  completion:@escaping ()->Void, scannt:Bool = false){
         //BlattAnimationen
-        var isLetzterTransport = false
+        var isLetzterTransport                      = false
+        geraetAnimationen.isScanning.value          = false
         geraetAnimationen.dokumentGesucht.value = gesuchtesDokument
         func einzelBlattTransport(){
             geraetAnimationen.animationIsBeendet = nil
             guard !isLetzterTransport, let transportiertesDokument = mainModel.geraetInAktion.dokumentenStapelModel.update( blattBewegungsTyp: blattBewegungsTyp)
-                else { print("umstapeln: \(blattBewegungsTyp) --> dokumente im Stapel abgearbeitet)"); completion();return}
+                else {
+                    print("umstapeln: \(blattBewegungsTyp) --> dokumente im Stapel abgearbeitet)")
+                    geraetAnimationen.isScanning.value          = false
+                    completion()
+                    return }
             
-            if scannt {geraetAnimationen.dokumentFuerScan.value = transportiertesDokument}
+            if scannt {
+                geraetAnimationen.dokumentFuerScan.value    = transportiertesDokument
+                geraetAnimationen.isScanning.value          = true
+            }
             print("umstapeln: \(blattBewegungsTyp) --> transportiertesDokument:\(transportiertesDokument.title!)")
             blattAnimationen.einzelBlattTransport(blattBewegungsTyp: blattBewegungsTyp,  completion: einzelBlattTransport)
             if (gesuchtesDokument == transportiertesDokument){isLetzterTransport = true}
@@ -103,11 +113,18 @@ class AnimationenModel{
     private func umstapeln(blattBewegungsTyp: BlattBewegungsTyp,  completion:@escaping ()->Void, scannt:Bool = false){
         //BlattAnimationen
         func einzelBlattTransport(){
-            geraetAnimationen.animationIsBeendet = nil
+            geraetAnimationen.animationIsBeendet    = nil
+            geraetAnimationen.isScanning.value      = false
             guard let transportiertesDokument = mainModel.geraetInAktion.dokumentenStapelModel.update( blattBewegungsTyp: blattBewegungsTyp)
-                else { print("umstapeln: \(blattBewegungsTyp) --> dokumente im Stapel abgearbeitet)"); completion();return}
+                else {
+                    print("umstapeln: \(blattBewegungsTyp) --> dokumente im Stapel abgearbeitet)")
+                    geraetAnimationen.isScanning.value          = false
+                    completion()
+                    return}
             
-            if scannt {geraetAnimationen.dokumentFuerScan.value = transportiertesDokument}
+            if scannt {
+                geraetAnimationen.isScanning.value          = true
+                geraetAnimationen.dokumentFuerScan.value    = transportiertesDokument}
             print("umstapeln: \(blattBewegungsTyp) --> transportiertesDokument:\(transportiertesDokument.title!)")
             blattAnimationen.einzelBlattTransport(blattBewegungsTyp: blattBewegungsTyp, completion: einzelBlattTransport)
         }
@@ -117,17 +134,16 @@ class AnimationenModel{
     }
     private func umstapelnEinBlatt(blattBewegungsTyp: BlattBewegungsTyp, completion:@escaping ()->Void){
         //BlattAnimationen
-        guard let transportiertesDokument = mainModel.geraetInAktion.dokumentenStapelModel.update( blattBewegungsTyp: blattBewegungsTyp )
-            else { print("Fehler!!!!)"); completion();return}
+        guard let transportiertesDokument = mainModel.geraetInAktion.dokumentenStapelModel.update( blattBewegungsTyp: blattBewegungsTyp,isUmstapelnEinBlatt:true )
+            else { print("Fehler!!!!  \(blattBewegungsTyp)"); completion();return}
         print("umstapelnEinBlatt: \(blattBewegungsTyp) --> transportiertesDokument:\(transportiertesDokument.title!)")
         func blattTransport() {blattAnimationen.einzelBlattTransport(blattBewegungsTyp: blattBewegungsTyp, completion: completion)}
         geraetAnimationen.startAnimation(blattBewegungsTyp: blattBewegungsTyp,completion:blattTransport )
     }
     
     private func gesuchtesDokumentInUnteresFachZwischenLagern(einlagerungsFachID:Int, completion:@escaping ()->Void){
-        print("gesuchtesDokumentInUnteresFachZwischenLagern")
+        print("gesuchtesDokumentInUnteresFachZwischenLagern fachID: \(einlagerungsFachID)")
         func einlagerungZuUnten(){
-            print("einlagerungZuUnten")
             geraetAnimationen.animationIsBeendet = nil
             // Dokument wird aus EinlagerungsFach ins untere Fach gelegt
             func aktion(){ umstapelnEinBlatt(blattBewegungsTyp: .EinlagerungZuUnten(fachID: einlagerungsFachID), completion: completion) }
@@ -207,23 +223,18 @@ class GeraetAnimationen{
     //wird von jeweiligem View gesetzt
     var animationIsBeendet:(()->())?
     
-    let dokumentFuerScan = MutableProperty<Dokument?>(nil)
-    let dokumentGesucht  = MutableProperty<Dokument?>(nil)
+    let dokumentFuerScan    = MutableProperty<Dokument?>(nil)
+    let dokumentGesucht     = MutableProperty<Dokument?>(nil)
+    let isScanning          = MutableProperty<Bool>(false)
     
-    private let eingabeFachEinzugIsGestartet                = MutableProperty<Bool>(false)
-    private let eingabeOberesFachVertBeweglFachIsGestartet  = MutableProperty<Bool>(false)
-    private let eingabeUnteresFachVertBeweglFachIsGestartet = MutableProperty<Bool>(false)
     private let angefahrensFachAnimation                    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     
     init(geraetInAktion:GeraetInAktionModel) {
-        geraetInAktion.eingabeFachEinzugDirection                   <~ eingabeFachEinzugIsGestartet.signal.map{$0 ? .right : .stop}
-        geraetInAktion.oberesFachInVertikalBeweglichDirection       <~ eingabeOberesFachVertBeweglFachIsGestartet.signal.map{$0 ? .right : .stop}
-        geraetInAktion.unteresFachInVertikalBeweglichDirection      <~ eingabeUnteresFachVertBeweglFachIsGestartet.signal.map{$0 ? .left : .stop}
         geraetInAktion.angefahrenesFach                             <~ angefahrensFachAnimation.signal
-        
         geraetInAktion.geraetModel.dokumentGesucht                  <~ dokumentGesucht.signal
         geraetInAktion.geraetModel.dokumentFuerScan                 <~ dokumentFuerScan.signal
         
+        geraetInAktion.isScanning                                   <~ isScanning.signal
     }
     
     
@@ -235,43 +246,22 @@ class GeraetAnimationen{
         switch blattBewegungsTyp{
         case .Eingabe:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
         case .EingabeZuOben:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp,einzugDirection:.right)
-            eingabeFachEinzugIsGestartet.value                  = true
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
         case .ObenZuEinlagerung:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp,einzugDirection:.right)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = true
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
         case .EinlagerungZuOben:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp,einzugDirection:.left)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
         case .EinlagerungZuUnten:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp,einzugDirection:.left)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
         case .Ausgabe:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = true
         case .Initial:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp)
-            eingabeFachEinzugIsGestartet.value                  = false
-            eingabeOberesFachVertBeweglFachIsGestartet.value    = false
-            eingabeUnteresFachVertBeweglFachIsGestartet.value   = false
             dokumentFuerScan.value                              = nil
             dokumentGesucht.value                               = nil
         }
-        animationIsBeendet?()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  self.animationIsBeendet?() }
     }
 }
 
