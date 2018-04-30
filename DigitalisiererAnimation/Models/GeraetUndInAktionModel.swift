@@ -77,7 +77,7 @@ class DokumentenStapelModel{
     //Dokumente herausfinden
     func getStapelUndDokumente(gesucht dokumente:[Dokument]) -> [GesuchteDokumenteInStapel] {
         let gesuchtInEinlagerung = dokumenteInEinlagerungsFaechern.map{ Array(Set($0).intersection(Set(dokumente))) }
-        return gesuchtInEinlagerung.enumerated().filter{$0.element.count > 0 }.map{GesuchteDokumenteInStapel(dokumente: $0.element, fachID: $0.offset)}
+        return gesuchtInEinlagerung.enumerated().filter{ $0.element.count > 0 }.map{GesuchteDokumenteInStapel(dokumente: $0.element, fachID: $0.offset)}
     }
     
     func getDokumente(fuer fachTyp:FachTyp) -> [Dokument]{
@@ -90,11 +90,14 @@ class DokumentenStapelModel{
     }
     private func add(dokument:Dokument, zu fachTyp:FachTyp) {
         switch fachTyp{
-        case .eingabeFach:          dokumenteInEingabeFach.append(dokument)
+        case .eingabeFach:
+            dokumenteInEingabeFach.append(dokument)
+            dokument.wurdeHerausgegeben()
         case .beweglichesFachOben:  dokumenteInOberesFachVertBeweglFach.append(dokument)
         case .beweglichesFachUnten: dokumenteInUnteresFachVertBeweglFach.append(dokument)
         case .einlagerungsFach(let fachID):
-            dokument.einlagernInFach(fach: fachID, position: dokumenteInEinlagerungsFaechern[fachID].count)
+            //nur wenn das Dokument von Außen kommt -> einlagern (sonst wird es nur umgestapelt)
+            if dokument.fachNr == -1 { dokument.einlagernInFach(fach: fachID, position: dokumenteInEinlagerungsFaechern[fachID].count) }
             dokumenteInEinlagerungsFaechern[fachID].append(dokument)
         }
     }
@@ -121,21 +124,21 @@ class DokumentenStapelModel{
 //MARK: Gerät
 class GeraetModel{
     let dokumentFuerScan    = MutableProperty<Dokument?>(nil)
-    let dokumentGesucht     = MutableProperty<Dokument?>(nil)
+    let dokumenteGesucht    = MutableProperty<[Dokument]>([Dokument]())
     let angefahrenesFach    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     //Models
     
     let eingabeFach         = FachModel(fachTyp: .eingabeFach, anzahlBlaetter: 0)
     let einlagerungsFaecher:EinlagerungsFaecherModel
-    let scanAnzeigeModel:ScanAnzeigeDokumentModel
-    let gesuchtesDokumentAnzeigeModel:ScanAnzeigeDokumentModel
+    
+    
     
     //init
+    let dokumenteFindenUndScannenModel:DokumenteFindenUndScannenModel
     let vertikalBeweglichesFach:VertikalBeweglichesFachModel
     init(dokumenteInEinlagerungsFaechern:[[Dokument]],angefahrenesFach:MutableProperty<AngefahrenesFach>,isScanning:MutableProperty<Bool>){
         einlagerungsFaecher             = EinlagerungsFaecherModel( anzahlBlaetter: dokumenteInEinlagerungsFaechern.map{$0.count})
-        scanAnzeigeModel                = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .ScanAnzeige,dokumentProperty:dokumentFuerScan,gesucht:dokumentGesucht)
-        gesuchtesDokumentAnzeigeModel   = ScanAnzeigeDokumentModel(scanAnzeigeTyp: .GesuchtesDokument,dokumentProperty:dokumentGesucht)
+        dokumenteFindenUndScannenModel  = DokumenteFindenUndScannenModel(zuScannen: dokumentFuerScan, gesuchte: dokumenteGesucht)
         vertikalBeweglichesFach         = VertikalBeweglichesFachModel(angefahrenesFach: angefahrenesFach, isScanning: isScanning)
         self.angefahrenesFach           <~ angefahrenesFach.signal
         einlagerungsFaecher.openedFach  <~ angefahrenesFach.signal
@@ -147,32 +150,68 @@ class GeraetModel{
 //MARK: Dokument Scan Anzeige 
 class ScanAnzeigeDokumentModel{
     
-    
-    let isHidden                = MutableProperty<Bool>(true)
     let buchstabeUndZahl        = MutableProperty<BuchstabeUndZahl?>(nil)
+    let isHidden                = MutableProperty<Bool>(true)
+    
     
     let scanGestartet           = MutableProperty<Void>(Void())
+    let scanBeendet             = MutableProperty<Void>(Void())
     let matching                = MutableProperty<Matching>(.none)
     
-    let ergebnisMatch           = MutableProperty<Matching>(.none)
-    init(scanAnzeigeTyp:ScanAnzeigeTyp,dokument:Dokument? = nil,dokumentProperty:MutableProperty<Dokument?> = MutableProperty<Dokument?>(nil),gesucht:MutableProperty<Dokument?> = MutableProperty<Dokument?>(nil)){
-        switch scanAnzeigeTyp{
-        case .ScanAnzeige:
-            isHidden            <~ dokumentProperty.producer.map{_ in true}
-            matching            <~ dokumentProperty.producer.map{_ in .none}
-            buchstabeUndZahl    <~ dokumentProperty.producer.map{ BuchstabeUndZahl(title: $0?.title)}
-            scanGestartet       <~ dokumentProperty.producer.filter{ $0 != nil }.map{ _ in () }
-            ergebnisMatch       <~ dokumentProperty.producer.map{ gesucht.value == nil ? .none : $0 == gesucht.value ? .matched : .matchedNicht}
-        case .GesuchtesDokument:
-            isHidden            <~ dokumentProperty.producer.map { $0 == nil }
-            buchstabeUndZahl    <~ dokumentProperty.producer.map{ BuchstabeUndZahl(title: $0?.title)}
-        case .NurAnsicht:
-            isHidden.value              = false
-            buchstabeUndZahl.value      = BuchstabeUndZahl(title:(dokument?.title))
-        }
+    
+    //init
+    init(dokument:Dokument? = nil){
+        isHidden.value              = false
+        buchstabeUndZahl.value      = BuchstabeUndZahl(title:(dokument?.title))
     }
-    func setMatching(){ matching.value  = ergebnisMatch.value}
+    init (zuScannen:MutableProperty<Dokument?>,matching:MutableProperty<Matching>){
+        isHidden            <~ zuScannen.signal.map{_ in true}  //zurücksetzen, bei neu
+        buchstabeUndZahl    <~ zuScannen.signal.map{ BuchstabeUndZahl(title: $0?.title)}
+        scanGestartet       <~ zuScannen.signal.filter{ $0 != nil }.map{ _ in () }
+        self.matching       <~ matching.signal
+    }
 }
 
+class GesuchteDokumenteModel{
+    //Models
+    let gesuchteDokumenteModels = MutableProperty<[ScanAnzeigeDokumentModel]> ([ScanAnzeigeDokumentModel]())
+    //init
+    init(gesuchte:MutableProperty<[Dokument]>,gefundene:MutableProperty<[Dokument]>){
+        gesuchteDokumenteModels <~ gesuchte.signal.map{$0.map{ ScanAnzeigeDokumentModel(dokument: $0) } }
+        gefundene.signal.observeValues { [weak self] dokumente in self?.setMatching(fuer: dokumente) }
+    }
+    //helper
+    func setMatching(fuer gefundene:[Dokument]){
+        let models = gesuchteDokumenteModels.value.filter{gefundene.map{BuchstabeUndZahl(title: $0.title)}.contains($0.buchstabeUndZahl.value) }
+        for model in models{ model.matching.value = .matched }
+    }
+}
 
-
+class DokumenteFindenUndScannenModel{
+    fileprivate let matching    = MutableProperty<Matching>(.none)
+    fileprivate let gefundene   = MutableProperty<[Dokument]>([Dokument]())
+    
+    let scanAnzeigeModel:ScanAnzeigeDokumentModel
+    let gesuchteDokumenteModel:GesuchteDokumenteModel
+    init(zuScannen:MutableProperty<Dokument?>,gesuchte: MutableProperty<[Dokument]> ){
+        
+        
+        scanAnzeigeModel        = ScanAnzeigeDokumentModel(zuScannen: zuScannen,matching:matching)
+        gesuchteDokumenteModel  = GesuchteDokumenteModel(gesuchte: gesuchte, gefundene: gefundene)
+        scanAnzeigeModel.scanBeendet.signal.observe {[weak self] _ in self?.scanBeendet(zuScannen: zuScannen.value, gesuchte: gesuchte.value) }
+    }
+    
+    func scanBeendet(zuScannen:Dokument?,gesuchte:[Dokument]){
+        matching.value  = DokumenteFindenUndScannenModel.matchErgebnis(fuer: zuScannen, in: gesuchte)
+        gefundene.value = DokumenteFindenUndScannenModel.gefunden(fuer: zuScannen, in: gesuchte, bisherGefunden: gefundene.value)
+    }
+    static func gefunden(fuer dokument:Dokument?, in gesucht:[Dokument],bisherGefunden:[Dokument]) -> [Dokument]{
+        var bisherGefunden = bisherGefunden
+        if matchErgebnis(fuer: dokument, in: gesucht) == .matched { bisherGefunden.append(dokument!) }
+        return bisherGefunden
+    }
+    static func matchErgebnis(fuer dokument:Dokument?, in gesucht:[Dokument]) -> Matching{
+        guard let dokument = dokument else { return .none}
+        return Array(Set(gesucht).intersection(Set([dokument]))).count == 0 ? .matchedNicht : .matched
+    }
+}

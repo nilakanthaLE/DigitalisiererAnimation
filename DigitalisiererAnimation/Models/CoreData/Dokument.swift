@@ -42,7 +42,9 @@ extension Dokument{
     }
     
     class func get(fach:Int) -> [Dokument]{
-        return getAll().filter{$0.fachNr == fach}
+        let inFach = getAll().filter{$0.fachNr == fach}.sorted{$1.fachPos > $0.fachPos}
+        for dokument in inFach.enumerated() { dokument.element.fachPos = Int16(dokument.offset) }
+        return inFach
     }
     
     class func getNotInGeraet() -> [Dokument]{
@@ -94,6 +96,14 @@ extension Dokument{
     class func gemeinsameTags(in dokumente:[Dokument])-> [Tag]{
         let first = dokumente.first?.tagSet ?? Set<Tag>()
         return Array(dokumente.map{$0.tagSet}.reduce(first) {$0.intersection($1) }) }
+    
+    func wurdeHerausgegeben(){
+        fachPos             = -1
+        fachNr              = -1
+        tags                = nil
+        einlagerungsDatum   = nil
+    }
+    
 }
 
 private func createAlphabet(start:String) -> [String]{

@@ -1,8 +1,8 @@
 //
-//  DokumentView.swift
+//  GesuchteDokumenteView.swift
 //  DigitalisiererAnimation
 //
-//  Created by Matthias Pochmann on 26.03.18.
+//  Created by Matthias Pochmann on 27.04.18.
 //  Copyright © 2018 Matthias Pochmann. All rights reserved.
 //
 
@@ -11,7 +11,57 @@ import UIKit
 import ReactiveSwift
 
 
+
+class DokumenteFindenUndScannenView:NibLoadingView{
+    var viewModel:DokumenteFindenUndScannenViewModel!{
+        didSet{
+            gesuchteDokumenteView.viewModel = viewModel.gesuchteDokumenteViewModel
+            scanDokumentView.viewModel      = viewModel.scanAnzeigeViewModel
+        }
+    }
+    @IBOutlet weak var gesuchteDokumenteView: GesuchteDokumenteView!
+    @IBOutlet weak var scanDokumentView: DokumentView!
+}
+
+class GesuchteDokumenteView:UIStackView{
+    var viewModel:GesuchteDokumenteViewModel!{
+        didSet{
+            axis            = .vertical
+            distribution    = .fillEqually
+            viewModel.dokumentenAnzeigeMatrix.signal.observeValues{[weak self] viewModels in self?.setDokViewMatrix(viewModels: viewModels)}
+            
+        }
+    }
+    func setDokViewMatrix(viewModels:[[ScanAnzeigeDokumentViewModel]]){
+        
+        let viewMatrix = viewModels.map{$0.map{VM -> FlexiblesDokumentView in
+            let view = FlexiblesDokumentView(frame: CGRect.zero)
+            view.viewModel = VM
+            return view
+            }
+        }
+        let proZeile = viewMatrix.first?.count ?? 0
+        for subview in arrangedSubviews {subview.removeFromSuperview()}
+        let zeilen = viewMatrix.map{zeile -> UIStackView in
+            var zeile = zeile as [UIView]
+            let leerViews: [UIView] =  Array.init(repeating: UIView(), count: proZeile - zeile.count)
+            zeile.append(contentsOf: leerViews)
+            let newStackZeile           = UIStackView(arrangedSubviews: zeile)
+            newStackZeile.axis          = .horizontal
+            newStackZeile.distribution  = .fillEqually
+            newStackZeile.spacing       = 4
+            return newStackZeile
+        }
+        for zeile in zeilen{ addArrangedSubview(zeile) }
+    }
+}
+
 //MARK: DokumentView
+class FlexiblesDokumentView:NibLoadingView{
+    var viewModel:ScanAnzeigeDokumentViewModel!{  didSet{ dokumentView.viewModel = viewModel  } }
+    @IBOutlet weak var dokumentView: DokumentView!
+}
+
 class DokumentView:NibLoadingView{
     //ViewModel
     var viewModel:ScanAnzeigeDokumentViewModel!{
@@ -27,9 +77,11 @@ class DokumentView:NibLoadingView{
             backGroundView.viewModel = viewModel.getViewModelForBackGround()
             
             viewModel.isHidden.producer.filter{$0}.startWithValues{[weak self] _ in self?.verdeckView.frame.origin = CGPoint.zero }
+            
+            
         }
     }
-    
+
     //Animation
     func scanAnimation(duration:TimeInterval = mainModel.animationen.blattAnimationDauer){
         verdeckView.frame.origin = CGPoint.zero
@@ -39,7 +91,8 @@ class DokumentView:NibLoadingView{
             _frame.origin.y = verdeckView.frame.height
             return _frame
         }
-        UIView.animate(withDuration: duration, animations: { self.verdeckView.frame = newFrame }) {_ in self.viewModel.setMatching() }
+        UIView.animate(withDuration: duration, animations: { self.verdeckView.frame = newFrame })
+        {_ in self.viewModel.scanBeendet() }
     }
     
     //IBOutlets
@@ -69,7 +122,7 @@ class BackgroundView:UIView{
             UIColor.red.set()
             path.stroke()
         }
-        else{ layer.borderWidth = 5 }
+        else{ layer.borderWidth = viewModel.isGesuchteDokumenteView ? 2 : 5 }
     }
 }
 

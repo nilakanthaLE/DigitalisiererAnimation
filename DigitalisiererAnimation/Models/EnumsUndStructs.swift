@@ -152,7 +152,7 @@ enum FachTyp:Equatable{
 
 
 
-struct BuchstabeUndZahl{
+struct BuchstabeUndZahl:Equatable{
     let buchstabe:String
     let zahl:String
     init(title:String?){
@@ -163,6 +163,10 @@ struct BuchstabeUndZahl{
 struct GesuchteDokumenteInStapel{
     let dokumente:[Dokument]
     let fachID:Int
+    init(dokumente:[Dokument],fachID:Int){
+        self.dokumente  = dokumente.sorted{$1.fachPos > $0.fachPos}
+        self.fachID     = fachID
+    }
 }
 struct BlattAnimation{
     var dauer:TimeInterval

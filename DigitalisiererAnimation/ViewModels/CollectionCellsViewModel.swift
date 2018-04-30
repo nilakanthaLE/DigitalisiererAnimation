@@ -14,7 +14,7 @@ class DokumentCollectionCellViewModel{
         self.dokument = dokument
         tags = dokument.tagArray
     }
-    func getViewModelForDokumentView() -> ScanAnzeigeDokumentViewModel { return ScanAnzeigeDokumentViewModel(scanAnzeigeDokumentModel: ScanAnzeigeDokumentModel(scanAnzeigeTyp: .NurAnsicht,dokument:dokument)) }
+    func getViewModelForDokumentView() -> ScanAnzeigeDokumentViewModel { return ScanAnzeigeDokumentViewModel(scanAnzeigeDokumentModel: ScanAnzeigeDokumentModel(dokument:dokument)) }
     var tags:[Tag]
 }
 

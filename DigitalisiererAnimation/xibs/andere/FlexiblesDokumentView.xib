@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlexiblesDokumentView" customModule="DigitalisiererAnimation" customModuleProvider="target">
+            <connections>
+                <outlet property="dokumentView" destination="lR0-gD-GKk" id="IK7-HB-5Au"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="228" height="376"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOy-0L-qAe">
+                    <rect key="frame" x="0.0" y="0.0" width="228" height="376"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eqc-ej-61U">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="376"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sC3-bW-RPV">
+                            <rect key="frame" x="0.0" y="0.0" width="228" height="376"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EL7-bw-rc8">
+                                    <rect key="frame" x="0.0" y="0.0" width="228" height="27"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="999" id="hkF-aa-f3f"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lR0-gD-GKk" userLabel="content" customClass="DokumentView" customModule="DigitalisiererAnimation" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="27" width="228" height="322"/>
+                                    <color key="backgroundColor" red="0.93305837560000005" green="0.74001662720000005" blue="0.31348737110000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="lR0-gD-GKk" secondAttribute="height" multiplier="100:141" id="kF9-xC-1rA"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzM-Qx-sgL">
+                                    <rect key="frame" x="0.0" y="349" width="228" height="27"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="bzM-Qx-sgL" firstAttribute="height" secondItem="EL7-bw-rc8" secondAttribute="height" id="NDR-45-5A8"/>
+                            </constraints>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXm-I4-MEm">
+                            <rect key="frame" x="228" y="0.0" width="0.0" height="376"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="CXm-I4-MEm" firstAttribute="width" secondItem="Eqc-ej-61U" secondAttribute="width" id="uov-nf-r5c"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XOy-0L-qAe" secondAttribute="bottom" id="FOT-13-oSt"/>
+                <constraint firstItem="XOy-0L-qAe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="W4p-A6-QS6"/>
+                <constraint firstItem="XOy-0L-qAe" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="tyv-M7-zBd"/>
+                <constraint firstAttribute="trailing" secondItem="XOy-0L-qAe" secondAttribute="trailing" id="zeG-CA-dh3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="131" y="194"/>
+        </view>
+    </objects>
+</document>

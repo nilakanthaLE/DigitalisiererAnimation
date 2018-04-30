@@ -15,7 +15,6 @@
 		5C3C40D32073B1E800C8898E /* DokumentCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */; };
 		5C3C40D5207B64D300C8898E /* BlattStueck.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3C40D4207B64D300C8898E /* BlattStueck.xib */; };
 		5C515D612069178700E2F1BD /* DokumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C515D602069178700E2F1BD /* DokumentView.xib */; };
-		5C515D652069191600E2F1BD /* DokumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C515D642069191600E2F1BD /* DokumentView.swift */; };
 		5C65E07C205EC8BC00D34170 /* PapierStapel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65E07B205EC8BC00D34170 /* PapierStapel.swift */; };
 		5C65E081205EFFC600D34170 /* PapierStapel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E080205EFFC600D34170 /* PapierStapel.xib */; };
 		5C65E083205F986F00D34170 /* Blatt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C65E082205F986F00D34170 /* Blatt.xib */; };
@@ -26,6 +25,10 @@
 		5C701D052089ED10000DA49D /* FineTuner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D042089ED10000DA49D /* FineTuner.swift */; };
 		5C701D09208DCBD6000DA49D /* DokumentenAuswahlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */; };
 		5C701D0B208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */; };
+		5C701D0F20930747000DA49D /* GesuchteDokumenteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D0E20930747000DA49D /* GesuchteDokumenteView.swift */; };
+		5C701D1120930769000DA49D /* GesuchteDokumenteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C701D1020930769000DA49D /* GesuchteDokumenteViewModel.swift */; };
+		5C701D1320934764000DA49D /* DokumenteFindenUndScannenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C701D1220934764000DA49D /* DokumenteFindenUndScannenView.xib */; };
+		5C701D35209611C4000DA49D /* FlexiblesDokumentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C701D34209611C4000DA49D /* FlexiblesDokumentView.xib */; };
 		5CBBF95F206D0A620032CAC7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBBF95E206D0A620032CAC7 /* Tag.swift */; };
 		5CBBF963206D293B0032CAC7 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */; };
 		5CC724D42056A05B001F1C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC724D32056A05B001F1C46 /* AppDelegate.swift */; };
@@ -70,7 +73,6 @@
 		5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DokumentCollectionCell.xib; sourceTree = "<group>"; };
 		5C3C40D4207B64D300C8898E /* BlattStueck.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlattStueck.xib; sourceTree = "<group>"; };
 		5C515D602069178700E2F1BD /* DokumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DokumentView.xib; sourceTree = "<group>"; };
-		5C515D642069191600E2F1BD /* DokumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentView.swift; sourceTree = "<group>"; };
 		5C65E07B205EC8BC00D34170 /* PapierStapel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PapierStapel.swift; sourceTree = "<group>"; };
 		5C65E080205EFFC600D34170 /* PapierStapel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PapierStapel.xib; sourceTree = "<group>"; };
 		5C65E082205F986F00D34170 /* Blatt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Blatt.xib; sourceTree = "<group>"; };
@@ -81,6 +83,10 @@
 		5C701D042089ED10000DA49D /* FineTuner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineTuner.swift; sourceTree = "<group>"; };
 		5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentenAuswahlVC.swift; sourceTree = "<group>"; };
 		5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DokumentenAuswahlViewModel.swift; sourceTree = "<group>"; };
+		5C701D0E20930747000DA49D /* GesuchteDokumenteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesuchteDokumenteView.swift; sourceTree = "<group>"; };
+		5C701D1020930769000DA49D /* GesuchteDokumenteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesuchteDokumenteViewModel.swift; sourceTree = "<group>"; };
+		5C701D1220934764000DA49D /* DokumenteFindenUndScannenView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DokumenteFindenUndScannenView.xib; sourceTree = "<group>"; };
+		5C701D34209611C4000DA49D /* FlexiblesDokumentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlexiblesDokumentView.xib; sourceTree = "<group>"; };
 		5CBBF95E206D0A620032CAC7 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 		5CC724D02056A05B001F1C46 /* DigitalisiererAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigitalisiererAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +218,7 @@
 				5CDB75D42087320500611C30 /* CollectionCellsViewModel.swift */,
 				5C701D022089E364000DA49D /* FeinTuningViewModel.swift */,
 				5C701D0A208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift */,
+				5C701D1020930769000DA49D /* GesuchteDokumenteViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -248,6 +255,7 @@
 				5C3C40D4207B64D300C8898E /* BlattStueck.xib */,
 				5C65E082205F986F00D34170 /* Blatt.xib */,
 				5C65E084205F9BB200D34170 /* BlattHaelfte.xib */,
+				5C701D1220934764000DA49D /* DokumenteFindenUndScannenView.xib */,
 			);
 			path = PapierStapelKomponenten;
 			sourceTree = "<group>";
@@ -256,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				5C515D602069178700E2F1BD /* DokumentView.xib */,
+				5C701D34209611C4000DA49D /* FlexiblesDokumentView.xib */,
 				5C3C40D12073B1E800C8898E /* DokumentCollectionCell.xib */,
 				5CBBF961206D293B0032CAC7 /* TagCollectionViewCell.xib */,
 			);
@@ -266,10 +275,10 @@
 			isa = PBXGroup;
 			children = (
 				5C701D06208DCABD000DA49D /* GeraeteKomponenten */,
-				5C515D642069191600E2F1BD /* DokumentView.swift */,
 				5CDB75D22087319C00611C30 /* CollectionViewCells.swift */,
 				5C701D042089ED10000DA49D /* FineTuner.swift */,
 				5C701D08208DCBD6000DA49D /* DokumentenAuswahlVC.swift */,
+				5C701D0E20930747000DA49D /* GesuchteDokumenteView.swift */,
 			);
 			path = ViewClasses;
 			sourceTree = "<group>";
@@ -394,6 +403,8 @@
 				5C65E083205F986F00D34170 /* Blatt.xib in Resources */,
 				5C3C40D32073B1E800C8898E /* DokumentCollectionCell.xib in Resources */,
 				5C3C40D5207B64D300C8898E /* BlattStueck.xib in Resources */,
+				5C701D35209611C4000DA49D /* FlexiblesDokumentView.xib in Resources */,
+				5C701D1320934764000DA49D /* DokumenteFindenUndScannenView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +484,7 @@
 				5CDB75B7207FD2DC00611C30 /* AnimationenModel.swift in Sources */,
 				5CC7250920580CA8001F1C46 /* VertikalBeweglichesFach.swift in Sources */,
 				5CDB75C52083A63A00611C30 /* VertBeweglFachViewModel.swift in Sources */,
+				5C701D0F20930747000DA49D /* GesuchteDokumenteView.swift in Sources */,
 				5CC724EB2056B6FC001F1C46 /* NibLoadingView.swift in Sources */,
 				5C701D032089E364000DA49D /* FeinTuningViewModel.swift in Sources */,
 				5CDB75BC208093A100611C30 /* GeraetViewModel.swift in Sources */,
@@ -482,6 +494,7 @@
 				5C19AACE20594EAE0038BFA9 /* EinlagerungsFaecher.swift in Sources */,
 				5CBBF95F206D0A620032CAC7 /* Tag.swift in Sources */,
 				5CDB75D52087320500611C30 /* CollectionCellsViewModel.swift in Sources */,
+				5C701D1120930769000DA49D /* GesuchteDokumenteViewModel.swift in Sources */,
 				5CC724FD2056E092001F1C46 /* FachMitKlappe.swift in Sources */,
 				5CDB75C92083CEAB00611C30 /* GeraetUndInAktionModel.swift in Sources */,
 				5C701D0B208DCC5A000DA49D /* DokumentenAuswahlViewModel.swift in Sources */,
@@ -492,7 +505,6 @@
 				5C65E07C205EC8BC00D34170 /* PapierStapel.swift in Sources */,
 				5C19AAD6205ABB2D0038BFA9 /* PosFeinTuning.swift in Sources */,
 				5C701D09208DCBD6000DA49D /* DokumentenAuswahlVC.swift in Sources */,
-				5C515D652069191600E2F1BD /* DokumentView.swift in Sources */,
 				5CDB75B3207FD22600611C30 /* PositionenUndFramesModel.swift in Sources */,
 				5C701D012089C591000DA49D /* EnumsUndStructs.swift in Sources */,
 			);

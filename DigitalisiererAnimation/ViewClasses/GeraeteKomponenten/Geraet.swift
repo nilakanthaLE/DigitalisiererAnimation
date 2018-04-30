@@ -24,8 +24,7 @@ class GeraetInAktionVC:UIViewController{
             ablageFaecher.viewModel      = viewModel.getViewModelFuerEinlagerungsFaecher()
             eingabeFach.viewModel        = viewModel.getViewModelForEingabeFach()
             beweglichesFach.viewModel    = viewModel.getViewModelForVerticalBeweglichesFach()
-            gesuchtesDokumentView.viewModel = viewModel.getGesuchtesDokumentViewModel()
-            scanDokumentView.viewModel    = viewModel.getScanDokumentViewModel()
+            dokumenteFindenUndScanneView.viewModel  = viewModel.getViewModelForDokumenteFindenUndScannen()
         }
     }
     
@@ -34,8 +33,8 @@ class GeraetInAktionVC:UIViewController{
     @IBOutlet weak var ablageFaecher: EinlagerungsFaecher!
     @IBOutlet weak var eingabeFach: FachMitKlappe!
     @IBOutlet weak var beweglichesFach: VertikalBeweglichesFach!
-    @IBOutlet weak var gesuchtesDokumentView: DokumentView!
-    @IBOutlet weak var scanDokumentView: DokumentView!
+    @IBOutlet weak var dokumenteFindenUndScanneView: DokumenteFindenUndScannenView!
+    
     @IBOutlet weak var gehaeuse: UIView!{
         didSet{
             gehaeuse.layer.borderColor  = UIColor.darkGray.cgColor

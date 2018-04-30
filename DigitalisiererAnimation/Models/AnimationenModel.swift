@@ -17,6 +17,7 @@ class AnimationenModel{
     
     //Heraussuchen von Dokumenten
     func heraussuchen(dokumente:[Dokument]){
+        mainModel.geraetInAktion.geraetModel.dokumenteGesucht.value = dokumente
         var gesuchteDokumenteInStapel = mainModel.geraetInAktion.dokumentenStapelModel.getStapelUndDokumente(gesucht: dokumente)
         func erledigt()     { geraetAnimationen.startAnimation(blattBewegungsTyp: .Initial) }
         func herausgabe()   { umstapeln(blattBewegungsTyp: .Ausgabe, completion: erledigt) }
@@ -87,7 +88,6 @@ class AnimationenModel{
         //BlattAnimationen
         var isLetzterTransport                      = false
         geraetAnimationen.isScanning.value          = false
-        geraetAnimationen.dokumentGesucht.value = gesuchtesDokument
         func einzelBlattTransport(){
             geraetAnimationen.animationIsBeendet = nil
             guard !isLetzterTransport, let transportiertesDokument = mainModel.geraetInAktion.dokumentenStapelModel.update( blattBewegungsTyp: blattBewegungsTyp)
@@ -224,14 +224,14 @@ class GeraetAnimationen{
     var animationIsBeendet:(()->())?
     
     let dokumentFuerScan    = MutableProperty<Dokument?>(nil)
-    let dokumentGesucht     = MutableProperty<Dokument?>(nil)
+    let dokumenteGesucht    = MutableProperty<[Dokument]>([Dokument]())
     let isScanning          = MutableProperty<Bool>(false)
     
     private let angefahrensFachAnimation                    = MutableProperty<AngefahrenesFach>(AngefahrenesFach(typ: .Eingabe))
     
     init(geraetInAktion:GeraetInAktionModel) {
         geraetInAktion.angefahrenesFach                             <~ angefahrensFachAnimation.signal
-        geraetInAktion.geraetModel.dokumentGesucht                  <~ dokumentGesucht.signal
+        geraetInAktion.geraetModel.dokumenteGesucht                 <~ dokumenteGesucht.signal
         geraetInAktion.geraetModel.dokumentFuerScan                 <~ dokumentFuerScan.signal
         
         geraetInAktion.isScanning                                   <~ isScanning.signal
@@ -259,7 +259,7 @@ class GeraetAnimationen{
         case .Initial:
             angefahrensFachAnimation.value = AngefahrenesFach(typ:blattBewegungsTyp)
             dokumentFuerScan.value                              = nil
-            dokumentGesucht.value                               = nil
+            dokumenteGesucht.value                              = [Dokument]()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  self.animationIsBeendet?() }
     }
